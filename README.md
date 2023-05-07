@@ -42,6 +42,7 @@ Os administradores podem criar, atualizar, ler e excluir produtos e gerenciar o 
 ### [Mockup do site CAASO Eyewear no FIGMA](https://www.figma.com/file/8UUIxMVwJ5aWvJciDRd1N9/Trabalho-WEB?type=design&node-id=3%3A2&t=hfZTwQtrPaKur3k5-1)
 
 ## Comentários Sobre o Código
+As páginas HTML5/CSS3 desenvolvidas para essa primeira etapa foram as telas de início (home - obrigatória), carrinho (cart) e a de alteração dos dados de um usuário (user update - representando nosso modelo de CRUD).
 
 ## Plano de teste
 
