@@ -1,4 +1,5 @@
 # _CAASO Eyewear Store_ 
+Projeto desenvolvido para a disciplina _SCC0219 - Introdução ao Desenvolvimento Web (2023)_
 
 ## Project Report
 
