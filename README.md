@@ -1,9 +1,14 @@
-# Projeto - CAASO Eyewear 
+# _CAASO Eyewear Store_ 
 
-## Identificação do grupo
-- Bernardo ()
-- Felipe Henrique de Oliveira (11272811)
-- Matheus Giraldi Alvarenga ()
+## Project Report
+
+### Alunos do Grupo 21
+
+| Nome | NUSP |
+| ------ | ------ |
+| Felipe Henrique de Oliveira | 11272811 |
+| Felipe Henrique de Oliveira | 11272811 |
+| Felipe Henrique de Oliveira | 11272811 |
 
 ## Requisitos
 
