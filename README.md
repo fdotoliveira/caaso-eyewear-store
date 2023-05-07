@@ -1,8 +1,3 @@
-## Contributors
-
-<a href="https://github.com/matheusgiraldi"><img src="https://avatars.githubusercontent.com/u/62122159?v=4" width="50px;" alt="Foto do colaborador"/></a>
-
-
 # _CAASO Eyewear Store_ 
 Projeto desenvolvido para a disciplina _SCC0219 - Introdução ao Desenvolvimento Web (2023)_
 
