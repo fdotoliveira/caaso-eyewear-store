@@ -38,6 +38,9 @@ Os administradores podem criar, atualizar, ler e excluir produtos e gerenciar o 
 
 ![Diagrama de Navegação](navigation_diagram.jpg)
 
+<img src="navigation_diagram" alt="texto alternativo da imagem" width="600">
+
+
 ### [Mockup do site CAASO Eyewear no FIGMA](https://www.figma.com/file/8UUIxMVwJ5aWvJciDRd1N9/Trabalho-WEB?type=design&node-id=3%3A2&t=hfZTwQtrPaKur3k5-1)
 
 ## Comentários Sobre o Código
