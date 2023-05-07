@@ -36,7 +36,6 @@ Os administradores podem criar, atualizar, ler e excluir produtos e gerenciar o 
 
 ### Diagrama de Navegação
 
-![Diagrama de Navegação](navigation_diagram.jpg)
 
 <img src="navigation_diagram" alt="texto alternativo da imagem" width="600">
 
