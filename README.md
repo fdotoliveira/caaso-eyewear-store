@@ -9,7 +9,7 @@ Projeto desenvolvido para a disciplina _SCC0219 - Introdução ao Desenvolviment
 | ------ | ------ |
 | Bernardo Rodrigues Tameirão Santos | 12733212 |
 | Felipe Henrique de Oliveira | 11272811 |
-| Matheus Giraldi Alvarenga | 11272811 |
+| Matheus Giraldi Alvarenga | 12543669 |
 
 ## Requisitos
 - O sistema tem 2 tipos de usuários: Clientes e Administradores.
