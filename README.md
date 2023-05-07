@@ -34,6 +34,11 @@ Nosso projeto é uma loja virtual que vende óculos. Os usuários podem navegar 
 
 Os administradores podem criar, atualizar, ler e excluir produtos e gerenciar o estoque. Eles também podem adicionar novos administradores e clientes. A interface do administrador é protegida por senha para garantir a segurança.
 
+### Diagrama de Navegação
+
+<img src="navigation_diagram.png" alt="Diagrama de Navegação" style="transform: rotate(90deg);">
+
+
 ### [Mockup do site CAASO Eyewear no FIGMA](https://www.figma.com/file/8UUIxMVwJ5aWvJciDRd1N9/Trabalho-WEB?type=design&node-id=3%3A2&t=hfZTwQtrPaKur3k5-1)
 
 ## Comentários Sobre o Código
