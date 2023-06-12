@@ -1,0 +1,25 @@
+{
+  "admins": [
+    {
+      "name": "name 1",
+      "email": "asifyubvas@gmail.com",
+      "password": "password 1",
+      "createdAt": "2023-03-07",
+      "id": 1
+    },
+    {
+      "name": "name 2",
+      "email": "asifyubvas@gmail.com",
+      "password": "password 2",
+      "createdAt": "2023-03-07",
+      "id": 2
+    },
+    {
+      "name": "name 3",
+      "email": "asifyubvas@gmail.com",
+      "password": "password 3",
+      "createdAt": "2023-03-07",
+      "id": 3
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "type": "Eyeglasses",
+      "title": "RAYBAN AVIATOR OPTICS in Rose Gold",
+      "price": 760.00,
+      "desc": "Currently one of the most iconic styles in the world, Ray-Ban Aviator Classic were originally designed for U.S. aviators in 1937. Aviator Classic RB6489 is a timeless model that combines great aviator styling with exceptional quality, performance and comfort.",
+      "img": "/images/eg_1_01.avif",
+      "img2": "/images/eg_1_02.webp",
+      "img3": "/images/eg_1_03.webp",
+      "img4": "/images/eg_1_04.webp",
+      "qty": 50
+    },
+    {
+      "id": 2,
+      "type": "Eyeglasses",
+      "title": "Oakley Deadbolt™",
+      "price": 1380.00,
+      "desc": "Oakley™ introduces the Ahyris collection, inspired by the eye's iris. It features a unified design and unique mechanical connections. Oakley™ Deadbolt eyeglasses offer a round silhouette and innovative frame design. They redefine optical eyewear with unconventional style.",
+      "img": "/images/eg_2_01.avif",
+      "img2": "/images/eg_2_02.avif",
+      "img3": "/images/eg_2_03.avif",
+      "img4": "/images/eg_2_04.avif",
+      "qty": 21
+    },
+    {
+      "id": 3,
+      "type": "Eyeglasses",
+      "title": "RAYBAN RB7140 OPTICS in Black",
+      "price": 430.00,
+      "desc": "Combining a classic rounded acetate design with contemporary stainless steel construction, the Ray-Ban RB7140 frame is a great option for anyone looking to add some modern flair to their look. The subtle curves of the acetate frame are contrasted by the gleaming metal arms and bridge. The angular keyhole cut outs at the bridge and curved, wingtip design provide fashion-forward accents to this classic design.",
+      "img": "/images/eg_3_01.webp",
+      "img2": "/images/eg_3_02.webp",
+      "img3": "/images/eg_3_03.webp",
+      "img4": "/images/eg_3_04.webp",
+      "qty": 120
+    },
+    {
+      "id": 4,
+      "type": "Eyeglasses",
+      "title": "RAYVBAN HEXAGONAL OPTICS in Havana On Gold",
+      "price": 760.00,
+      "desc": "Inspired by one of Ray-Ban's best sellers, Hexagonal lands into Optical. With flat temples and embossed logos they promote a minimalist look.Timeless elegance in a new softly hexagonal shape.Choose the classic gold, silver and black metals, as well as enamel effects.",
+      "img": "/images/eg_4_01.avif",
+      "img2": "/images/eg_4_02.avif",
+      "img3": "/images/eg_4_03.avif",
+      "img4": "/images/eg_4_04.webp",
+      "qty": 75
+    },
+    {
+      "id": 5,
+      "type": "Sunglasses",
+      "title": "Prada Symbole sunglasses",
+      "price": 2650.00,
+      "desc": "Sunglasses with an acetate frame featuring sinuous and slightly beveled rims expressing bold femininity. The thin temples are emphasized by a refined three-dimensional element that iconographically depicts the Prada triangle logo.",
+      "img": "/images/sg_5_01.avif",
+      "img2": "/images/sg_5_02.avif",
+      "img3": "/images/sg_5_03.avif",
+      "img4": "/images/sg_5_04.avif",
+      "qty": 8
+    },
+    {
+      "id": 6,
+      "type": "Sunglasses",
+      "title": "Eye Jacket Reduz PIET Matte Bone W/ Prizm Trail Torch",
+      "price": 1050.00,
+      "desc": "The Eye Jacket™ Redux, inspired by the original Eye Jacket that revolutionized the look of performance sports eyewear, retains the distinctive oval silhouette that made its debut in 1994, but is enhanced with today's revolutionary technologies. In this collaboration version with Piet, its frame appears in Khaki tone with Trail Torch lenses.",
+      "img": "/images/sg_6_01.webp",
+      "img2": "/images/sg_6_02.webp",
+      "img3": "/images/sg_6_03.webp",
+      "img4": "/images/sg_6_04.webp",
+      "qty": 25
+    },
+    {
+      "id": 7,
+      "type": "Sunglasses",
+      "title": "Frogskins PIET MTTCoolgray W/ Prizm Grey+",
+      "price": 760.00,
+      "desc": "During a remarkable period in pop culture, Oakley introduced the iconic Frogskins sunglasses. Now, in partnership with Piet, they are reinvented with a sleek and minimalist gray design, paying homage to Clay prototypes.",
+      "img": "/images/sg_7_01.webp",
+      "img2": "/images/sg_7_02.webp",
+      "img3": "/images/sg_7_03.webp",
+      "img4": "/images/sg_7_04.webp",
+      "qty": 60
+    },
+    {
+      "id": 8,
+      "type": "Sunglasses",
+      "title": "Oakley Half Jacket® 2.0 XL",
+      "price": 530.00,
+      "desc": "If you’re trying to keep up with the competition, you need to keep up with changing light. We engineered Half Jacket 2.0 to let you swap out the lenses with ease.",
+      "img": "/images/sg_8_01.avif",
+      "img2": "/images/sg_8_02.avif",
+      "img3": "/images/sg_8_03.avif",
+      "img4": "/images/sg_8_04.avif",
+      "qty": 100
+    },
+    {
+      "id": 9,
+      "type": "Accessories",
+      "title": "Carnan College Dad Hat",
+      "price": 219.00,
+      "desc": "Purple twill cap with front embroidered chenille patch; leather back trim; 100% certified cotton fabric;",
+      "img": "/images/accs_9_01.avif",
+      "img2": "/images/accs_9_02.avif",
+      "img3": "/images/accs_9_03.avif",
+      "img4": "/images/accs_9_04.avif",     
+      "qty": 82
+    },
+    {
+      "id": 10,
+      "type": "Accessories",
+      "title": "PIET Heritage Snoopy Hat",
+      "price": 249.90,
+      "desc": "The Heritage Snoopy Hat is an unstructured six-panel hat with a cotton twill front and back. It has size adjustment on the back, malleable brim, front patch and embroidery on the side.",
+      "img": "/images/accs_10_01.webp",
+      "img2": "/images/accs_10_02.webp",
+      "img3": "/images/accs_10_03.webp",
+      "img4": "/images/accs_10_04.webp",
+      "qty": 45
+    },
+    {
+      "id": 11,
+      "type": "Accessories",
+      "title": "Backpack Oakley x Piet Kitchen Sink",
+      "price": 1739.90,
+      "desc": "The Oakley KITCHEN SINK Backpack is a renowned and innovative backpack by Oakley. It features a padded laptop compartment, dual access, eyewear storage, and a wet item drainage system. It's durable and comfortable.",
+      "img": "/images/accs_11_01.webp",
+      "img2": "/images/accs_11_02.webp",
+      "img3": "/images/accs_11_03.webp",
+      "img4": "/images/accs_11_04.webp",
+      "qty": 6
+    },
+    {
+      "id": 12,
+      "type": "Accessories",
+      "title": "Bucket PIET Hunter Camo Recycled Packable",
+      "price": 199.90,
+      "desc": "Bucket Hat made of recycled polyester with Piet exclusive camouflage pattern. It has lateral adjustment and accompanies a bag, to be able to store the hat.",
+      "img": "/images/accs_12_01.webp",
+      "img2": "/images/accs_12_02.webp",
+      "img3": "/images/accs_12_03.webp",
+      "img4": "/images/accs_12_04.webp",
+      "qty": 86
+    }                         
+  ]
+}

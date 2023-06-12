@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "name": "name 2",
+      "email": "email 2",
+      "age": "12",
+      "password": "109148d81y2",
+      "createdAt": "2023-03-07",
+      "id": 2
+    },
+    {
+      "name": "name 3",
+      "email": "email 3",
+      "age": "12",
+      "password": "12747gf19712",
+      "createdAt": "2023-03-07",
+      "id": 3
+    },
+    {
+      "name": "name 5",
+      "email": "email 5",
+      "age": "12",
+      "password": "dj12974t1g",
+      "createdAt": "2023-06-11",
+      "id": 4
+    },
+    {
+      "name": "asiyfg",
+      "email": "DFAYWFD7TR",
+      "age": "1234",
+      "password": "ASIHGF8167TR",
+      "createdAt": "2023-06-11",
+      "id": 5
+    }
+  ]
+}
