@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# _CAASO Eyewear Store_ 
+Projeto desenvolvido para a disciplina _SCC0219 - Introdução ao Desenvolvimento Web (2023)_
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Report
 
-## Available Scripts
+### Alunos do Grupo 21
 
-In the project directory, you can run:
+| Nome | NUSP |
+| ------ | ------ |
+| Bernardo Rodrigues Tameirão Santos | 12733212 |
+| Felipe Henrique de Oliveira | 11272811 |
+| Matheus Giraldi Alvarenga | 12543669 |
 
-### `npm start`
+## Requisitos
+- O sistema tem 2 tipos de usuários: Clientes e Administradores.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Administradores são responsáveis por cadastrar/gerenciar administradores, clientes e produtos fornecidos. A aplicação já vem com uma conta admin com a senha admin.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Os registros de administrador incluem, pelo menos: nome, id, telefone, e-mail.
 
-### `npm test`
+- Cada registro de cliente inclui, pelo menos: nome, id, endereço, telefone, e-mail.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Os registros de produtos incluem, pelo menos: nome, id, foto, descrição, preço, quantidade (em estoque), quantidade vendida.
 
-### `npm run build`
+- Venda de produtos: os produtos são selecionados, a quantidade escolhida e incluídos em um carrinho. Os produtos são comprados usando um número de cartão de crédito (qualquer número é aceito pelo sistema). A quantidade de produto vendido é subtraída da quantidade em estoque e adicionada à quantidade vendida. Os carrinhos são esvaziados apenas no pagamento ou pelos clientes.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Gerenciamento de produtos/serviços: Administradores podem criar/atualizar/lê/deletar (CRUD) novos produtos e serviços. Por exemplo, eles podem mudar a quantidade em estoque.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- O sistema deve fornecer requisitos de acessibilidade e oferecer boa usabilidade. O sistema deve ser responsivo, ou seja, ele deve concluir as tarefas atribuídas dentro de um tempo razoável.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Descrição do Projeto
 
-### `npm run eject`
+Nosso projeto é uma loja virtual que vende óculos. Os usuários podem navegar pelos produtos e adicioná-los a um carrinho. Antes de inserir as informações do cartão de crédito, os usuários precisam inserir informações de entrega, caso a entrega seja em um novo endereço ou o usuário não esteja logado. Quando eles estiverem prontos para fazer o check-out, eles podem inserir um número de cartão de crédito válido para concluir a compra. As compras são registradas em um histórico de pedidos para referência futura.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Os administradores podem criar, atualizar, ler e excluir produtos e gerenciar o estoque. Eles também podem adicionar novos administradores e clientes. A interface do administrador é protegida por senha para garantir a segurança.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Diagrama de Navegação
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Diagrama de Navegação](navigation_diagram.jpg)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+### [Mockup do site CAASO Eyewear no FIGMA](https://www.figma.com/file/8UUIxMVwJ5aWvJciDRd1N9/Trabalho-WEB?type=design&node-id=3%3A2&t=hfZTwQtrPaKur3k5-1)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Comentários Sobre o Código
+As páginas HTML5/CSS3 desenvolvidas para essa primeira etapa foram as telas de início (home - obrigatória), carrinho (cart) e a de alteração dos dados de um usuário (user update - representando nosso modelo de CRUD).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Plano de teste
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Resultado dos testes
 
-### Analyzing the Bundle Size
+## Processos de Construção
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+## Problemas
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+## Comentários
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
