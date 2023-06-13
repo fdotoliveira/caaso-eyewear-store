@@ -1,4 +1,3 @@
-import { Children } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
@@ -6,6 +5,9 @@ import ScrolltoTop from "./components/ScrolltoTop/ScrolltoTop";
 import Home from "./pages/Home/Home";
 import Product from "./pages/Product/Product";
 import Products from "./pages/Products/Products";
+import ProductList from "./pages/CRUD/Products/manage-products";
+import UserList from "./pages/CRUD/Users/manage-users";
+import AdminList from "./pages/CRUD/Admins/manage-admins";
 import "./app.scss"
 
 const Layout = () => {
@@ -35,6 +37,18 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <Product />,
+      },
+      {
+        path: "/product-list/",
+        element: <ProductList />,
+      },
+      {
+        path: "/user-list/",
+        element: <UserList />,
+      },
+      {
+        path: "/admin-list/",
+        element: <AdminList />,
       },
     ],
   },
