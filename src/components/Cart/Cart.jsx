@@ -17,43 +17,61 @@ const Cart = () => {
     });
     return total.toFixed(2);
   };
+  /*
+  const stripePromise = loadStripe(
+    "pk_test_eOTMlr8usx1ctymXqrik0ls700lQCsX2UB"
+  );
   
+  const handlePayment = async () => {
+    try {
+      const stripe = await stripePromise;
+      const res = await makeRequest.post("/orders", {
+        products,
+      });
+      await stripe.redirectToCheckout({
+        sessionId: res.data.stripeSession.id,
+      });
+
+    } catch (err) {
+      console.log(err);
+    }
+  };*/
   return (
-    <div className="cart">
-      {products.length > 0 ? (
-        <>
-          <h1>Products in your cart</h1>
-          {products.map((item) => (
-            <div className="item" key={item.id}>
-              <img src={item.img} alt="" />
-              <div className="details">
-                <h1>{item.title}</h1>
-                <p>{item.desc?.substring(0, 70)}</p>
-                <div className="price">
-                  {item.quantity} x ${item.price}
-                </div>
+  <div className="cart">
+    {products.length > 0 ? (
+      <>
+        <h1>Products in your cart</h1>
+        {products.map((item) => (
+          <div className="item" key={item.id}>
+            <img src={item.img} alt="" />
+            <div className="details">
+              <h1>{item.title}</h1>
+              <p>{item.desc?.substring(0, 70)}</p>
+              <div className="price">
+                {item.quantity} x ${item.price}
               </div>
-              <DeleteOutlinedIcon
-                className="delete"
-                onClick={() => dispatch(removeItem(item.id))}
-              />
             </div>
-          ))}
-          <div className="total">
-            <span>SUBTOTAL</span>
-            <span>${totalPrice()}</span>
+            <DeleteOutlinedIcon
+              className="delete"
+              onClick={() => dispatch(removeItem(item.id))}
+            />
           </div>
-          <button>PROCEED TO CHECKOUT</button>
-          <span className="reset" onClick={() => dispatch(resetCart())}>
-            Reset Cart
-          </span>
-        </>
-      ) : (
-        <div className="empty-cart">
-          <p>YOU DON'T HAVE ANY ITEMS IN YOUR CART.</p>
+        ))}
+        <div className="total">
+          <span>SUBTOTAL</span>
+          <span>${totalPrice()}</span>
         </div>
-      )}
-    </div>
+        <button>PROCEED TO CHECKOUT</button>
+        <span className="reset" onClick={() => dispatch(resetCart())}>
+          Reset Cart
+        </span>
+      </>
+    ) : (
+      <div className="empty-cart">
+        <p>YOU DON'T HAVE ANY ITEMS IN YOUR CART.</p>
+      </div>
+    )}
+  </div>
   );
 };
 
