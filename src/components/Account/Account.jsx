@@ -6,7 +6,7 @@ const Account = () => {
     return (
         <div className="dropdown">
             <>
-                <Link className="link" to="#">
+                <Link className="link" to="perfil/p-data">
                     <div className="item">
                         My Account
                     </div>
