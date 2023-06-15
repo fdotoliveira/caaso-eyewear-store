@@ -73,5 +73,6 @@ Pressão de prazos: Devido a um cronograma apertado, tivemos que lidar com o des
 
 Dificuldade no uso do React: Enfrentamos dificuldades ao trabalhar com a biblioteca React, seja na compreensão de seus conceitos ou na implementação eficiente das funcionalidades desejadas.
 
+Apesar dos warning gerados pelo compilador do React, entendemos que os avisos atuais não parecem ter um impacto negativo no desenvolvimento da aplicação e planejamos abordá-los em um momento posterior, considerando que esta não é a versão final do projeto.
 ## Comentários
 
