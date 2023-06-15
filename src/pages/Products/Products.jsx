@@ -11,27 +11,18 @@ const Products = () => {
   const [maxPrice, setMaxPrice] = useState(3000);
   const [sort, setSort] = useState(null);
   const [selectedSubCats, setSelectedSubCats] = useState([]);
-  const categoryMap = {};
 
-  let category;
+  let tipo;
 
   if(catId == 1) {
-    category = "Eyeglasses";
+    tipo = "Eyeglasses";
   } else if(catId == 2) {
-    category = "Sunglasses";
+    tipo = "Sunglasses";
   } else {
-    category = "Accessories";
+    tipo = "Accessories";
   }
   
-  const currentProduct = db.products.filter((product) => product.type === category);
-
-  currentProduct.forEach((product) => {
-    if (!categoryMap[product.categorie]) {
-      categoryMap[product.categorie] = [product.id];
-    } else {
-      categoryMap[product.categorie].push(product.id);
-    }
-  });  
+  const currentProduct = db.products.filter((product) => product.type === tipo);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -43,23 +34,29 @@ const Products = () => {
         : selectedSubCats.filter((item) => item !== value)
     );
   };
-
+  
+  console.log(selectedSubCats);
 
   return (
     <div className="products">
       <div className="left">
         <div className="filterItem">
           <h2>Product Categories</h2>
-          {Object.entries(categoryMap).map(([categorie, ids]) => (
-            <div className="inputItem" key={categorie}>
-              <input
-                type="checkbox"
-                id={categorie}
-                value={ids}
-                onChange={handleChange}
-              />
-              <label htmlFor={categorie}>{categorie}</label>
-            </div>
+          {currentProduct
+            .filter((product, index, array) => {
+              // Verifica se o item atual é o primeiro com o valor repetido da propriedade 'categorie'
+              return array.findIndex((p) => p.categorie === product.categorie) === index;
+            })
+            .map((product) => (
+              <div className="inputItem" key={product.id}>
+                <input
+                  type="checkbox"
+                  id={product.id}
+                  value={product.id}
+                  onChange={handleChange}
+                />
+                <label htmlFor={product.id}>{product.categorie}</label>
+              </div>
             ))}
         </div>
         <div className="filterItem">
@@ -110,7 +107,7 @@ const Products = () => {
           maxPrice={maxPrice}
           sort={sort}
           catId={currentProduct}
-          type={category}
+          tipo={tipo}
         />
       </div>
     </div>

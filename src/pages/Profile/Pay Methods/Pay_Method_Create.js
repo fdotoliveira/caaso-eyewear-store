@@ -1,4 +1,4 @@
-import '../assets/css/bootstrap.min.css';
+
 import '../assets/css/main.css';
 import {Link, Outlet, useNavigate} from "react-router-dom";
 import '../assets/css/profile.css';
@@ -23,7 +23,7 @@ function Content_PMethod_Create(){
                 <div className="input-content">
                     <form>
 
-                        <div className="row">
+                        <div className="row-profile">
                         </div>
 
                         <div className="form-group">
@@ -35,7 +35,7 @@ function Content_PMethod_Create(){
                                 </select>
                         </div>
 
-                        <div className="row">
+                        <div className="row-profile">
                         </div>
 
                         <Outlet/>
@@ -115,7 +115,7 @@ function CreditCard( {} ) {
                 <label for="cardName">Card Name</label>
                 <input type="text" class="form-control" id="cardName" placeholder="Card Name" onKeyDown={clickPress}/>
             </div>
-            <div className="row">
+            <div className="row-profile">
                 <div className="col-md-6">
                     <div className="form-group">
                         <label for="expiration-date">Expiration Date</label>
@@ -193,7 +193,7 @@ function DebitCard( {} ){
                 <label for="cardName">Card Name</label>
                 <input type="text" class="form-control" id="cardName" placeholder="Card Name" onKeyDown={clickPress}/>
             </div>
-            <div className="row">
+            <div className="row-profile">
                 <div className="col-md-6">
                     <div className="form-group">
                         <label for="expiration-date">Expiration Date</label>

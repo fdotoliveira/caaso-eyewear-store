@@ -1,4 +1,4 @@
-import '../assets/css/bootstrap.min.css';
+
 import '../assets/css/main.css';
 import React, {useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
@@ -102,7 +102,7 @@ function Content_PMethod( {} ){
 
                             }
                         </ul>
-                            <div className="row">
+                            <div className="row-profile">
                                 <div className="col-md-6">
                                     <div className="form-group">
 
@@ -115,7 +115,7 @@ function Content_PMethod( {} ){
                                 </center>
                             </div>
 
-                            <div className="row">
+                            <div className="row-profile">
                                 <div className="form-group col-md-6">
 
                                     <div className="input-group">

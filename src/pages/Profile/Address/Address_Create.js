@@ -1,4 +1,3 @@
-import '../assets/css/bootstrap.min.css';
 import '../assets/css/main.css';
 import {Link, useNavigate} from "react-router-dom";
 import '../assets/css/profile.css';
@@ -67,7 +66,7 @@ function Content_Address_Create( {} ){
                         <center>
                         <p id="warning-message" className="warning-message">All fields need to be filled in.</p>
                         </center>
-                        <div className="row">
+                        <div className="row-profile">
                             <div className="col-md-6">
                                 <div className="form-group">
                                     <label for="country">Country</label>
@@ -85,7 +84,7 @@ function Content_Address_Create( {} ){
                             <label for="address">Address</label>
                             <input type="text" className="form-control" id="address" placeholder="Your Address" onKeyDown={clickPress}/>
                         </div>
-                        <div className="row">
+                        <div className="row-profile">
                             <div className="col-md-6">
                                 <div className="form-group">
                                     <label for="house-number">House Number</label>
@@ -103,7 +102,7 @@ function Content_Address_Create( {} ){
                             <label for="complement">Complement (optional)</label>
                             <input type="text" className="form-control" id="complement" placeholder="Complement" onKeyDown={clickPress}/>
                         </div>
-                        <div className="row">
+                        <div className="row-profile">
                             <div className="col-md-6">
                                 <div className="form-group">
                                     <label for="city">City</label>

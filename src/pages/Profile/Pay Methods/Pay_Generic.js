@@ -1,4 +1,4 @@
-import '../assets/css/bootstrap.min.css';
+
 import '../assets/css/main.css';
 import React, {useEffect} from 'react';
 import {Link, Outlet} from "react-router-dom";
@@ -22,7 +22,7 @@ function Content_Pay_Data( {} ){
 
                 </div>
 
-                <div className="row" style={{width: "75%"}}>
+                <div className="row-profile" style={{width: "75%"}}>
                     <Link to={"/perfil/pay-methods"} className="link-profile" onClick={clickPress}>
                         <div className="profile-button" style={{width: "250%"}}> 
                             <center>
@@ -76,7 +76,7 @@ function Content_CreditData( {} ) {
                 <label for="cardName">Card Name</label>
                 <input type="text" class="form-control" id="cardName" readOnly/>
             </div>
-            <div className="row">
+            <div className="row-profile">
                 <div className="col-md-6">
                     <div className="form-group">
                         <label for="expiration-date">Expiration Date</label>
@@ -125,7 +125,7 @@ function Content_DebitData( {} ) {
                 <label for="cardName">Card Name</label>
                 <input type="text" class="form-control" id="cardName" readOnly/>
             </div>
-            <div className="row">
+            <div className="row-profile">
                 <div className="col-md-6">
                     <div className="form-group">
                         <label for="expiration-date">Expiration Date</label>

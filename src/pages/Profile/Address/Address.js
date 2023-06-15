@@ -1,4 +1,4 @@
-import '../assets/css/bootstrap.min.css';
+
 import '../assets/css/main.css';
 import '../assets/css/profile.css';
 import React, {useState, useEffect} from 'react';
@@ -86,7 +86,7 @@ function Content_Address( {} ){
 
                             }
                         </ul>
-                            <div className="row">
+                            <div className="row-profile">
                                 <div className="col-md-6">
                                     <div className="form-group">
 
@@ -99,7 +99,7 @@ function Content_Address( {} ){
                                 </center>
                             </div>
 
-                            <div className="row">
+                            <div className="row-profile">
                                 <div className="form-group col-md-6">
 
                                     <div className="input-group">

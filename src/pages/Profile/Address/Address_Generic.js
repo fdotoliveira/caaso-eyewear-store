@@ -1,4 +1,4 @@
-import '../assets/css/bootstrap.min.css';
+
 import '../assets/css/main.css';
 import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
@@ -43,7 +43,7 @@ function Content_AddressData( {} ){
                         <center>
                         <p id="warning-message" className="warning-message">All fields need to be filled in.</p>
                         </center>
-                        <div className="row">
+                        <div className="row-profile">
                             <div className="col-md-6">
                                 <div className="form-group">
                                     <label for="country">Country</label>
@@ -61,7 +61,7 @@ function Content_AddressData( {} ){
                             <label for="address">Address</label>
                             <input type="text" className="form-control" id="address" placeholder="Your Address" readOnly/>
                         </div>
-                        <div className="row">
+                        <div className="row-profile">
                             <div className="col-md-6">
                                 <div className="form-group">
                                     <label for="house-number">House Number</label>
@@ -79,7 +79,7 @@ function Content_AddressData( {} ){
                             <label for="complement">Complement (optional)</label>
                             <input type="text" className="form-control" id="complement" placeholder="Complement" readOnly/>
                         </div>
-                        <div className="row">
+                        <div className="row-profile">
                             <div className="col-md-6">
                                 <div className="form-group">
                                     <label for="city">City</label>
@@ -97,7 +97,7 @@ function Content_AddressData( {} ){
                     </form>
                 </div>
 
-                <div className="row" style={{width: "75%"}}>
+                <div className="row-profile" style={{width: "75%"}}>
                     <Link to={"/perfil/address"} className="link-profile" onClick={clickPress}>
                         <div className="profile-button" style={{width: "250%"}}> 
                             <center>
