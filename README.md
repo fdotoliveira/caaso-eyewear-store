@@ -48,6 +48,26 @@ As páginas HTML5/CSS3 desenvolvidas para essa primeira etapa foram as telas de 
 
 ### Produtos
 
+Para testar as funcionalidades de filtro e classificação por subcategoria e preço, siga os seguintes passos:
+
+- Classificar por subcategoria do produto enquanto filtra por preço:
+
+  - Acesse a página de listagem de produtos.
+  - Localize as opções de filtro por subcategoria e preço.
+  - Selecione a subcategoria desejada.
+  - Aplique um filtro de preço específico, como faixa de preço ou preço máximo.
+  - Verifique se os produtos exibidos correspondem à subcategoria selecionada e se estão dentro do intervalo de preço definido.
+
+- Classificar por subcategoria enquanto filtra por ordem de preço:
+
+  - Na mesma página de listagem de produtos, mantenha a subcategoria selecionada ou escolha outra subcategoria.
+  - Localize a opção ordenação de produtos.
+  - Selecione a opção "Price (Lowest first)" ou "Price (Highest first)".
+  - Verifique se os produtos são reordenados de acordo com o critério de preço, com os preços mais altos ou mais baixos sendo exibidos primeiro, dentro da subcategoria selecionada.
+
+Ao realizar esses testes, você poderá verificar se as funcionalidades de filtro e classificação por subcategoria e preço estão funcionando corretamente. Certifique-se de observar se os produtos são filtrados corretamente com base na subcategoria selecionada e se a ordenação por preço está sendo aplicada adequadamente dentro dessa subcategoria.
+
+
 ### Produto Específico
 
 Para testar as funcionalidades de um produto específico no carrinho de compras, siga os seguintes passos:
