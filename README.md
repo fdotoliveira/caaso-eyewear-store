@@ -51,6 +51,7 @@ As páginas HTML5/CSS3 desenvolvidas para essa primeira etapa foram as telas de 
 
 ## Processos de Construção
 Para clonar o repositório utilizando o Git, utilize o seguinte comando: 
+
 `git clone https://github.com/fdotoliveira/caaso-eyewear-store.git`
 
 Para executar o site, é necessário ter o Node.js e o gerenciador de pacotes npm instalados em seu sistema. Além disso, é comum utilizar o json-server como uma ferramenta para fornecer dados fictícios durante o desenvolvimento da aplicação. O json-server permite criar uma API REST falsa com base em um arquivo JSON, o que é útil para testar e visualizar o funcionamento do site com dados predefinidos antes de ter uma API completa.
@@ -60,9 +61,11 @@ Portanto, após instalar o Node.js e o npm, é recomendado instalar o json-serve
 `npm install`
 
 Execute o back-end com json-server:
+
 `npm run backend`
 
 Execute o front-end:
+
 `npm start`
 
 ## Problemas
