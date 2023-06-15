@@ -45,17 +45,33 @@ Os administradores podem criar, atualizar, ler e excluir produtos e gerenciar o 
 As páginas HTML5/CSS3 desenvolvidas para essa primeira etapa foram as telas de início (home - obrigatória), carrinho (cart) e a de alteração dos dados de um usuário (user update - representando nosso modelo de CRUD).
 
 ## Plano de teste
+
 ### Produtos
 
 ### Produto Específico
 
+Para testar as funcionalidades de um produto específico no carrinho de compras, siga os seguintes passos:
+
+- Selecionar a quantidade de óculos e adicionar ao carrinho:
+
+  - Abra a página do produto desejado.
+  - Localize o campo de seleção de quantidade.
+  - Escolha uma quantidade desejada de óculos.
+  - Clique no botão "ADD TO CART".
+  - Verifique se a quantidade selecionada é exibida corretamente no carrinho.
+
+- Verificar o controle de estoque:
+
+  - No mesmo produto, tente selecionar uma quantidade maior do que a disponível em estoque.
+
+Ao realizar esses testes com um produto específico, você poderá verificar se as funcionalidades de seleção de quantidade e controle de estoque estão operando corretamente. Certifique-se de observar se a quantidade selecionada é refletida corretamente no carrinho e se a validação de estoque está funcionando adequadamente.
 
 ### Carrinho
 
 - Adicionar produtos ao carrinho:
   
   - Selecione um produto disponível na loja.
-  - Clique no botão "Adicionar ao Carrinho".
+  - Clique no botão "ADD TO CART".
   - Verifique se o produto é exibido corretamente no carrinho.
 
 - Exibir o preço total corretamente:
@@ -67,13 +83,13 @@ As páginas HTML5/CSS3 desenvolvidas para essa primeira etapa foram as telas de 
 
   - Adicione alguns produtos ao carrinho.
   - Localize um produto específico na lista do carrinho.
-  - Clique no botão "Remover" ou no ícone de lixeira ao lado do produto.
+  - Clique no ícone de lixeira ao lado do produto.
   - Verifique se o produto é removido corretamente do carrinho.
 
 - Resetar o carrinho completamente:
 
   - Adicione alguns produtos ao carrinho.
-  - Localize a opção de "Resetar Carrinho" ou "Limpar Carrinho".
+  - Localize a opção de "Reset Cart".
   - Clique na opção para remover todos os produtos do carrinho.
   - Verifique se o carrinho fica vazio, sem nenhum produto adicionado anteriormente.
 
