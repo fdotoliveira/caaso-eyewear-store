@@ -6,12 +6,6 @@ import db from "../../db.json";
 
 
 const List = ({ subCats, maxPrice, sort, catId, type}) => { 
-  console.log("type::");
-  console.log(type);
-  console.log("subCats::");
-  console.log(subCats);
-  console.log("catId::");
-  console.log(catId);
   const combinedIds = subCats.join(",");
   const individualIds = combinedIds.split(",");
   const transformedSubCats = individualIds.map((id) => parseInt(id, 10));
