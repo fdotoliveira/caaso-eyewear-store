@@ -5,16 +5,24 @@ import Card from "../Card/Card";
 import db from "../../db.json";
 
 
-const List = ({ subCats, maxPrice, sort, catId, tipo}) => {
+const List = ({ subCats, maxPrice, sort, catId, type}) => {
   console.log(subCats);
+  const combinedIds = subCats.join(",");
+  const individualIds = combinedIds.split(",");
+  const transformedSubCats = individualIds.map((id) => parseInt(id, 10));
+
   const filteredProducts = useMemo(() => {
+    if (subCats.length === 0) {
+      return catId; // Retorna um array contendo apenas o catId
+    }
+
     return db.products.filter(
       (product) =>
-        product.type === tipo &&
-        (subCats.length === 0 || subCats.includes(product.id.toString())) &&
+        product.type === type &&
+        (transformedSubCats.length === 0 || transformedSubCats.includes(product.id)) &&
         product.price <= maxPrice
     );
-  }, [db.products, subCats, maxPrice]);
+  }, [db.products, transformedSubCats, maxPrice, subCats]);
 
   const sortedProducts = useMemo(() => {
     if (sort === "asc") {
@@ -24,6 +32,7 @@ const List = ({ subCats, maxPrice, sort, catId, tipo}) => {
     }
     return filteredProducts;
   }, [filteredProducts, sort]);
+
 
   return (
     <div className="list">
