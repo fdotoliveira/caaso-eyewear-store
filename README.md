@@ -45,7 +45,37 @@ Os administradores podem criar, atualizar, ler e excluir produtos e gerenciar o 
 As páginas HTML5/CSS3 desenvolvidas para essa primeira etapa foram as telas de início (home - obrigatória), carrinho (cart) e a de alteração dos dados de um usuário (user update - representando nosso modelo de CRUD).
 
 ## Plano de teste
+### Produtos
 
+### Produto Específico
+
+
+### Carrinho
+
+- Adicionar produtos ao carrinho:
+  
+  - Selecione um produto disponível na loja.
+  - Clique no botão "Adicionar ao Carrinho".
+  - Verifique se o produto é exibido corretamente no carrinho.
+
+- Exibir o preço total corretamente:
+
+  - Adicione vários produtos diferentes ao carrinho.
+  - Verifique se o preço total é atualizado corretamente, refletindo a soma dos preços individuais dos produtos.
+
+- Excluir produtos individualmente do carrinho:
+
+  - Adicione alguns produtos ao carrinho.
+  - Localize um produto específico na lista do carrinho.
+  - Clique no botão "Remover" ou no ícone de lixeira ao lado do produto.
+  - Verifique se o produto é removido corretamente do carrinho.
+
+- Resetar o carrinho completamente:
+
+  - Adicione alguns produtos ao carrinho.
+  - Localize a opção de "Resetar Carrinho" ou "Limpar Carrinho".
+  - Clique na opção para remover todos os produtos do carrinho.
+  - Verifique se o carrinho fica vazio, sem nenhum produto adicionado anteriormente.
 
 ## Resultado dos testes
 
