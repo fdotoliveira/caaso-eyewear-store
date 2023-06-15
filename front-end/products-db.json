@@ -1,0 +1,31 @@
+{
+  "products": [
+    {
+      "name": "name 1",
+      "brand": "brand 1",
+      "category": "Glasses",
+      "price": "10",
+      "description": "desc 1",
+      "createdAt": "2023-03-07",
+      "id": 1
+    },
+    {
+      "name": "name 2",
+      "brand": "brand 2",
+      "category": "Acessories",
+      "price": "1090",
+      "description": "desc 2",
+      "createdAt": "2023-03-07",
+      "id": 2
+    },
+    {
+      "name": "name 3",
+      "brand": "brand 3",
+      "category": "Acessories",
+      "price": "1090",
+      "description": "desc 3",
+      "createdAt": "2023-03-07",
+      "id": 3
+    }
+  ]
+}
