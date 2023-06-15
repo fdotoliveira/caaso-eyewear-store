@@ -31,6 +31,14 @@
       "password": "ASIHGF8167TR",
       "createdAt": "2023-06-11",
       "id": 5
+    },
+    {
+      "name": "name 1",
+      "email": "email2@gmail.com",
+      "age": "23",
+      "password": "fasuifgaui",
+      "createdAt": "2023-06-15",
+      "id": 6
     }
   ]
 }
