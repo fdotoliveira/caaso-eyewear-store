@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../bootstrap.scss";
 
 export function Products() {
-    const [content, setContent] = useState(<ProductList showForm={showForm}/>);
+    const [content, setContent] = useState(<ProductList showForm={showForm} />);
 
     function showList() {
         setContent(<ProductList showForm={showForm} />);
@@ -42,8 +42,8 @@ function ProductList(props) {
         fetch("http://localhost:3001/products/" + id, {
             method: "DELETE"
         })
-        .then((response) => response.json())
-        .then((data) => fetchProducts());
+            .then((response) => response.json())
+            .then((data) => fetchProducts());
     }
 
     return (
@@ -56,11 +56,11 @@ function ProductList(props) {
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Brand</th>
-                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Type</th>
                         <th>Price</th>
-                        <th>Created At</th>
+                        <th>Quantity</th>
+                        <th>Desc</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,11 +69,11 @@ function ProductList(props) {
                             return (
                                 <tr key={index}>
                                     <td>{product.id}</td>
-                                    <td>{product.name}</td>
-                                    <td>{product.brand}</td>
-                                    <td>{product.category}</td>
+                                    <td>{product.title}</td>
+                                    <td>{product.type}</td>
                                     <td>{product.price}</td>
-                                    <td>{product.createdAt}</td>
+                                    <td>{product.qty}</td>
+                                    <td>{product.desc}</td>
                                     <td style={{ width: "10px", whiteSpace: "nowrap" }}>
                                         <button onClick={() => props.showForm(product)} type="button" className="btn btn-primary btn-sm me-2">Edit</button>
                                         <button onClick={() => deleteProduct(product.id)} type="button" className="btn btn-danger btn-sm">Delete</button>
@@ -96,10 +96,10 @@ function ProductForm(props) {
         event.preventDefault();
 
         const formData = new FormData(event.target);
-        
+
         const product = Object.fromEntries(formData.entries());
-        
-        if (!product.name || !product.brand || !product.category || !product.price) {
+
+        if (!product.title || !product.type || !product.price || !product.qty || !product.categorie) {
             console.log("Please provide all the required information!");
             setErrorMessage(
                 <div className="alert alert-warning" role="alert">
@@ -109,7 +109,7 @@ function ProductForm(props) {
             return;
         }
 
-        console.log( props.product.id)
+        console.log(props.product.id)
         console.log(typeof props.product.id)
 
         if (props.product.id) {
@@ -132,8 +132,6 @@ function ProductForm(props) {
                 });
         }
         else {
-            product.createdAt = new Date().toISOString().slice(0, 10);
-
             fetch("http://localhost:3001/products", {
                 method: "POST",
                 headers: {
@@ -170,23 +168,23 @@ function ProductForm(props) {
                     </div>}
 
                     <div className="_row mb-3">
-                        <label className="col-sm-4 col-form-label">Name</label>
+                        <label className="col-sm-4 col-form-label">Title</label>
                         <div className="col-sm-8">
-                            <input className="form-control" name="name" defaultValue={props.product.name} />
-                        </div>
-                    </div>
-
-                    <div className="_row mb-3">
-                        <label className="col-sm-4 col-form-label">Brand</label>
-                        <div className="col-sm-8">
-                            <input className="form-control" name="brand" defaultValue={props.product.brand} />
+                            <input className="form-control" name="title" defaultValue={props.product.title} />
                         </div>
                     </div>
 
                     <div className="_row mb-3">
                         <label className="col-sm-4 col-form-label">Category</label>
                         <div className="col-sm-8">
-                            <select name="category" className="form-select" defaultValue={props.product.category}>
+                            <input className="form-control" name="categorie" defaultValue={props.product.categorie} />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Type</label>
+                        <div className="col-sm-8">
+                            <select name="type" className="form-select" defaultValue={props.product.type}>
                                 <option value='Glasses'>Glasses</option>
                                 <option value='Sunglasses'>Sunglasses</option>
                                 <option value='Acessories'>Acessories</option>
@@ -202,9 +200,44 @@ function ProductForm(props) {
                     </div>
 
                     <div className="_row mb-3">
-                        <label className="col-sm-4 col-form-label">Description</label>
+                        <label className="col-sm-4 col-form-label">Quantity</label>
                         <div className="col-sm-8">
-                            <textarea className="col-sm-8" name="description" defaultValue={props.product.description} />
+                            <input className="form-control" name="qty" defaultValue={props.product.qty} />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Desc</label>
+                        <div className="col-sm-8">
+                            <textarea className="col-sm-8" name="desc" defaultValue={props.product.desc} />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Imagem 1</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" name="img" defaultValue={props.product.img} />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Imagem 2</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" name="img2" defaultValue={props.product.img2} />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Imagem 3</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" name="img3" defaultValue={props.product.img3} />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Imagem 4</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" name="img" defaultValue={props.product.img4} />
                         </div>
                     </div>
 
