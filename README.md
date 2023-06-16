@@ -128,7 +128,11 @@ Portanto, após instalar o Node.js e o npm, é recomendado instalar o json-serve
 
 Execute o back-end com json-server:
 
-`npm run backend`
+`npm run backend-products`
+
+`npm run backend-users`
+
+`npm run backend-admins`
 
 Execute o front-end:
 
