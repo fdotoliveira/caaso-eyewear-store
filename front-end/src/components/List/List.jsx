@@ -2,7 +2,7 @@ import React from "react";
 import { useMemo } from "react";
 import "./List.scss";
 import Card from "../Card/Card";
-import db from "../../db.json";
+import db from "../../products-db.json";
 
 
 const List = ({ subCats, maxPrice, sort, catId, type}) => { 

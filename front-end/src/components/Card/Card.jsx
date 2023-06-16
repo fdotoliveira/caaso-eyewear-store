@@ -1,7 +1,7 @@
 import React from "react";
 import "./Card.scss";
 import { Link } from "react-router-dom";
-import db from "../../db.json";
+import db from "../../products-db.json";
 
 
 const Card = ({ item }) => {
