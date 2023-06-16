@@ -187,7 +187,7 @@ function ProductForm(props) {
                             <select name="type" className="form-select" defaultValue={props.product.type}>
                                 <option value='Glasses'>Glasses</option>
                                 <option value='Sunglasses'>Sunglasses</option>
-                                <option value='Acessories'>Acessories</option>
+                                <option value='Accessories'>Accessories</option>
                             </select>
                         </div>
                     </div>

@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import List from "../../components/List/List";
 import "./Products.scss";
-import db from "../../products-db.json";
+import db from "../../db.json";
 
 
 const Products = () => {
