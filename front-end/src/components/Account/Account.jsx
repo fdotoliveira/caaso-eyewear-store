@@ -1,8 +1,18 @@
 import React from "react";
 import "./Account.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Account = () => {
+const Account = ({isOpen}) => {
+
+    const navigate = useNavigate();
+
+    const handleLogOutClick = () => {
+
+        localStorage.removeItem('login');
+        isOpen();
+        navigate("/");
+    }
+
     return (
         <div className="dropdown">
             <>
@@ -26,6 +36,10 @@ const Account = () => {
                         Admin List
                     </div>
                 </Link>
+
+                <div className="item" onClick={handleLogOutClick}>
+                    Log Out
+                </div>
             </>
         </div>
     );

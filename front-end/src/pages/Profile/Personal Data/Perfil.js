@@ -13,17 +13,21 @@ function Content_PData( {} ){
 
         if(data === null){
 
-            data  =["", "", "", "", "", "", ""];
+            data  =["", "", "", "", "", ""];
 
         }
 
         document.getElementById("first").value = data[0];
         document.getElementById("last").value = data[1];
-        document.getElementById("email").value = data[2];
-        document.getElementById("gender").value = data[3];
-        document.getElementById("phone").value = data[4];
-        document.getElementById("cpf").value = data[5];
-        document.getElementById("birthdate").value = data[6];
+        //document.getElementById("email").value = data[2];
+        document.getElementById("gender").value = data[2];
+        document.getElementById("phone").value = data[3];
+        document.getElementById("cpf").value = data[4];
+        document.getElementById("birthdate").value = data[5];
+
+        const login = JSON.parse(localStorage.getItem('login'));
+
+        document.getElementById("email").value = login[0];
 
     }, []);
 
@@ -34,11 +38,11 @@ function Content_PData( {} ){
 
             resultado[0] = document.getElementById("first").value;
             resultado[1] = document.getElementById("last").value;
-            resultado[2] = document.getElementById("email").value;
-            resultado[3] = document.getElementById("gender").value;
-            resultado[4] = document.getElementById("phone").value;
-            resultado[5] = document.getElementById("cpf").value;
-            resultado[6] = document.getElementById("birthdate").value;
+            //resultado[2] = document.getElementById("email").value;
+            resultado[2] = document.getElementById("gender").value;
+            resultado[3] = document.getElementById("phone").value;
+            resultado[4] = document.getElementById("cpf").value;
+            resultado[5] = document.getElementById("birthdate").value;
 
             localStorage.setItem('p-data', JSON.stringify(resultado));
               
@@ -73,7 +77,7 @@ function Content_PData( {} ){
                         <div className="form-group">
                             <label for="email">Email address</label>
                             <input type="email" class="form-control" id="email" placeholder="Enter email"
-                                onKeyDown={clickPress}/>
+                                onKeyDown={clickPress} readOnly/>
                         </div>
                         <div className="row-profile">
                             <div className="col-md-6">

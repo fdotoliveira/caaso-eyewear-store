@@ -6,11 +6,13 @@ import "./Navbar.scss"
 import Cart from "../Cart/Cart";
 import Account from "../Account/Account";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [openCart, setOpenCart] = useState(false);
   const [openAccount, setOpenAccount] = useState(false);
   const products = useSelector((state) => state.cart.products);
+  const navigate = useNavigate();
 
   const handleFooterClick = () => {
     const footerElement = document.getElementsByClassName('footer')[0];
@@ -30,6 +32,11 @@ const Navbar = () => {
     if(openCart)
       setOpenCart(!openCart);
   };
+
+  const handleLoginClick = () => {
+
+    navigate("login");
+  }
 
   return (
     <div className="navbar">
@@ -72,9 +79,17 @@ const Navbar = () => {
 
           <div className="icons">
             {/* My Account */}
-            <div className="accountIcon" onClick={handleAccountClick}>
-              <PersonOutlineOutlinedIcon />
-            </div>
+            {JSON.parse(localStorage.getItem('login'))===null? 
+              <div className="item">
+                <div className="clickable" onClick={handleLoginClick}>Login</div>
+              </div>
+              
+              : 
+
+              <div className="accountIcon" onClick={handleAccountClick}>
+                <PersonOutlineOutlinedIcon />
+              </div>
+            }
 
             {/* Carrinho */}
             <div className="cartIcon" onClick={handleCartClick}>
@@ -86,7 +101,7 @@ const Navbar = () => {
         </div>
       </div>
       {openCart && <Cart />}
-      {openAccount && <Account />}
+      {openAccount && <Account isOpen={handleAccountClick}/>}
     </div>
   );
 };
