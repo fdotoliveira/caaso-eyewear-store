@@ -17,6 +17,7 @@ import {Content_Address_Create} from "./pages/Profile/Address/Address_Create";
 import {Content_AddressData} from "./pages/Profile/Address/Address_Generic";
 import {Content_Orders} from "./pages/Profile/Orders/Orders";
 import {Login, Login_Content, SignUp_Content, ForgotPassword_Content} from "./pages/Login/Login";
+import {Payment, Payment_Card, Payment_Pix, Payment_New, Payment_Choose} from "./pages/Payment/Payment";
 import "./app.scss"
 
 const Layout = () => {
@@ -129,6 +130,28 @@ const router = createBrowserRouter([
           }
         ]
       },
+      {
+        path: "payment",
+        element: <Payment />,
+        children: [
+          {
+            path: "",
+            element: <Payment_Choose/>
+          },
+          {
+            path: ":payId",
+            element: <Payment_Card/>
+          },
+          {
+            path: "pix",
+            element: <Payment_Pix/>
+          },
+          {
+            path: "new",
+            element: <Payment_New/>
+          }
+        ]
+      }
     ],
   },
 ]);

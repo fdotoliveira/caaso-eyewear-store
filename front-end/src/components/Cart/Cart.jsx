@@ -4,6 +4,8 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { useSelector } from "react-redux";
 import { removeItem, resetCart } from "../../redux/cartReducer";
 import { useDispatch } from "react-redux";
+import {Link} from "react-router-dom";
+
 
 
 const Cart = () => {
@@ -43,7 +45,18 @@ const Cart = () => {
           <span>SUBTOTAL</span>
           <span>${totalPrice()}</span>
         </div>
-        <button>CHECKOUT</button>
+        {JSON.parse(localStorage.getItem('login'))===null?
+
+          <Link to={"login"}>
+            <button>CHECKOUT</button>
+          </Link>
+
+          :
+
+          <Link to={"payment"}>
+            <button>CHECKOUT</button>
+          </Link>
+        }
         <span className="reset" onClick={() => dispatch(resetCart())}>
           Reset Cart
         </span>
