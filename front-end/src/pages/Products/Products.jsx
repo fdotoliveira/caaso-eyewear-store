@@ -54,7 +54,7 @@ const Products = () => {
     category = "Eyeglasses";
   } else if(catId === 2) {
     category = "Sunglasses";
-  } else {
+  } else if(catId === 3) {
     category = "Accessories";
   }
   

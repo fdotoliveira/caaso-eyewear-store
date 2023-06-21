@@ -4,14 +4,14 @@
       "id": 1,
       "type": "Eyeglasses",
       "title": "Symbole glasses",
-      "price": "650",
+      "price": 650,
       "desc": "Metal frames with a feminine, contemporary touch. The wide front is combined with exclusive open temples decorated with an elegant insert featuring the Prada triangle logo and inspired by jewelry of the maison.",
       "img": "/images/eg_1_01.avif",
       "img2": "/images/eg_1_02.webp",
       "img3": "/images/eg_1_03.webp",
       "img4": "/images/eg_1_04.webp",
       "categorie": "Grey",
-      "qty": "50"
+      "qty": 0
     },
     {
       "id": 2,
@@ -128,7 +128,7 @@
       "img3": "/images/sg_9_03.avif",
       "img4": "/images/sg_9_04.avif",
       "categorie": "Rose",
-      "qty": 10
+      "qty": 5
     },
     {
       "id": 10,
@@ -245,7 +245,7 @@
       "img3": "/images/accs_17_03.avif",
       "img4": "/images/accs_17_04.avif",
       "categorie": "Hat",
-      "qty": 82
+      "qty": 3
     },
     {
       "id": 18,

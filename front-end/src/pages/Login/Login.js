@@ -63,7 +63,7 @@ function Login_Content(){
                 </center>
                 <div className="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email"
+                    <input type="email" class="form-control" id="email" placeholder="Email"
                         onKeyDown={clickPress}/>
                 </div>
                 <div style={{padding: "10px"}}></div>
@@ -77,7 +77,7 @@ function Login_Content(){
         <div style={{padding: "10px"}}></div>
         <div className="account-links">
             <ul>
-                <li><Link to={"forgot-password"} className="normal_text">Forgot My Password</Link></li>
+                <li><Link to={"forgot-password"} className="normal_text">Forgot your password?</Link></li>
                 <li><Link to={"sign-up"} className="normal_text">Create Account</Link></li>
             </ul>
         </div>
@@ -149,7 +149,7 @@ function SignUp_Content(){
                 </center>
                 <div className="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email"
+                    <input type="email" class="form-control" id="email" placeholder="Email"
                         onKeyDown={clickPress}/>
                 </div>
                 <div style={{padding: "10px"}}></div>
@@ -186,14 +186,14 @@ function ForgotPassword_Content(){
     return(
         <>
         <div className="input-label">
-            <h1>Forgot My Password</h1>
+            <h1>Reset your password</h1>
         </div>
         <div className="input-content">
             <form>
                 <center><p>Please, type your email to receive a temporary password.</p></center>
                 <div className="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email"/>
+                    <label for="email">Email address*</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email"/>
                 </div>
             </form>
         </div>

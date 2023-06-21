@@ -74,8 +74,9 @@ const Product = () => {
               })
             )
           }
+          disabled={currentProduct.qty === 0}
         >
-          ADD TO CART
+          {currentProduct.qty === 0 ? "OUT OF STOCK" : "ADD TO CART"}
         </button>
       </div>
     </div>

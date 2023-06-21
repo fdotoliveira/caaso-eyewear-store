@@ -23,17 +23,23 @@ function ProductList(props) {
     const [products, setProducts] = useState([]);
 
     function fetchProducts() {
-        fetch("http://localhost:3001/products")
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Unexpected Server Response");
-                }
-                return response.json()
-            })
-            .then((data) => {
-                setProducts(data);
-            })
-            .catch((error) => console.log("Error: ", error));
+      fetch("http://localhost:3001/products")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Unexpected Server Response");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Converter preço e quantidade para números
+          const productsWithNumbers = data.map((product) => ({
+            ...product,
+            price: parseFloat(product.price),
+            qty: parseInt(product.qty),
+          }));
+          setProducts(productsWithNumbers);
+        })
+        .catch((error) => console.log("Error: ", error));
     }
 
     useEffect(() => fetchProducts(), []);
@@ -99,7 +105,10 @@ function ProductForm(props) {
 
         const product = Object.fromEntries(formData.entries());
 
-        if (!product.title || !product.type || !product.price || !product.qty || !product.categorie) {
+        product.price = parseFloat(product.price);
+        product.qty = parseInt(product.qty);
+
+        if (!product.title || !product.type || product.price==="" || product.qty==="" || !product.categorie) {
             console.log("Please provide all the required information!");
             setErrorMessage(
                 <div className="alert alert-warning" role="alert">
@@ -185,7 +194,7 @@ function ProductForm(props) {
                         <label className="col-sm-4 col-form-label">Type</label>
                         <div className="col-sm-8">
                             <select name="type" className="form-select" defaultValue={props.product.type}>
-                                <option value='Glasses'>Glasses</option>
+                                <option value='Eyeglasses'>Eyeglasses</option>
                                 <option value='Sunglasses'>Sunglasses</option>
                                 <option value='Accessories'>Accessories</option>
                             </select>
@@ -237,7 +246,7 @@ function ProductForm(props) {
                     <div className="_row mb-3">
                         <label className="col-sm-4 col-form-label">Imagem 4</label>
                         <div className="col-sm-8">
-                            <input className="form-control" name="img" defaultValue={props.product.img4} />
+                            <input className="form-control" name="img4" defaultValue={props.product.img4} />
                         </div>
                     </div>
 
