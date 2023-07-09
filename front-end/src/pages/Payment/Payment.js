@@ -30,7 +30,7 @@ function Payment_Pix( {} ){
         <div className="input-content">
             <center>
             <p>Please, use the QRCode within 30 minutes.</p>
-            <img src={process.env.PUBLIC_URL + '/qrcode.png'} alt="QR Code" width="500"/>
+            <img src={process.env.PUBLIC_URL + '/qrcode.png'} alt="QR Code" style={{maxWidth: "100%"}}/>
             </center>
         </div>
         <div style={{padding: "10px"}}>
@@ -114,13 +114,11 @@ function Payment_New( {} ){
                     </div>
                 </div>
             </div>
-            <div className="row-profile" style={{width: "75%"}}>
+            <div className="profile-button" style={{width: "70%", marginLeft: "15%"}}> 
                 <Link onClick={checkFields} to="/" className='link-profile'>
-                    <div className="profile-button" style={{width: "250%"}}> 
-                        <center>
-                            Confirm Purchase
-                        </center>
-                    </div>
+                    <center>
+                        Confirm Purchase
+                    </center>
                 </Link>
             </div>
         </>
@@ -132,7 +130,6 @@ function Payment_Card( {} ){
     const dispatch = useDispatch();
 
     const clickPress = (evento) => {
-
 
         dispatch(resetCart());
     }
@@ -179,13 +176,11 @@ function Payment_Card( {} ){
                     </div>
                 </div>
             </div>
-            <div className="row-profile" style={{width: "75%"}}>
-                <Link to={"/"} className="link-profile" onClick={clickPress}>
-                    <div className="profile-button" style={{width: "250%"}}> 
-                        <center>
-                            Confirm Purchase
-                        </center>
-                    </div>
+            <div className="profile-button" style={{width: "70%", marginLeft: "15%"}}> 
+                <Link onClick={clickPress} to="/" className='link-profile'>
+                    <center>
+                        Confirm Purchase
+                    </center>
                 </Link>
             </div>
         </>

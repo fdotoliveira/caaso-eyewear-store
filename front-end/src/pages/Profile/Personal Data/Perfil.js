@@ -22,12 +22,13 @@ function Content_PData( {} ){
         //document.getElementById("email").value = data[2];
         document.getElementById("gender").value = data[2];
         document.getElementById("phone").value = data[3];
-        document.getElementById("cpf").value = data[4];
-        document.getElementById("birthdate").value = data[5];
+        //document.getElementById("cpf").value = data[4];
+        document.getElementById("birthdate").value = data[4];
 
         const login = JSON.parse(localStorage.getItem('login'));
 
         document.getElementById("email").value = login[0];
+        document.getElementById("cpf").value = login[2];
 
     }, []);
 
@@ -41,8 +42,8 @@ function Content_PData( {} ){
             //resultado[2] = document.getElementById("email").value;
             resultado[2] = document.getElementById("gender").value;
             resultado[3] = document.getElementById("phone").value;
-            resultado[4] = document.getElementById("cpf").value;
-            resultado[5] = document.getElementById("birthdate").value;
+            //resultado[4] = document.getElementById("cpf").value;
+            resultado[4] = document.getElementById("birthdate").value;
 
             localStorage.setItem('p-data', JSON.stringify(resultado));
               
@@ -105,7 +106,7 @@ function Content_PData( {} ){
                                 <label for="cpf">CPF</label>
                                 <div className="input-group">
                                     <input type="text" className="form-control" id="cpf" placeholder="123.456.789-00"
-                                        onKeyDown={clickPress}/>
+                                        onKeyDown={clickPress} readOnly/>
                                 </div>
                             </div>
                             <div className="form-group col-md-6">

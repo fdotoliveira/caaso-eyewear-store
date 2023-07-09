@@ -20,34 +20,41 @@ function Login_Content(){
 
     const navigate = useNavigate();
 
+    const checkFields = (event) => {
+
+        const resultado = [];
+        let checagem = true;
+
+        resultado[0] = document.getElementById("email").value;
+        resultado[1] = document.getElementById("password").value;
+
+        for(let contador=0; contador<2; contador++){
+
+            if (resultado[contador] === ""){
+
+                checagem = false;
+            }
+        }
+
+        if(checagem === true){
+
+            localStorage.setItem('login', JSON.stringify(resultado));
+            console.log(resultado);
+
+            navigate("/");
+
+        } else {
+        
+            event.preventDefault();
+            document.getElementById("warning-message").style.display = "inline";
+        }
+    }
+
     const clickPress = (event) => {
 
-        if(event.key === "Enter"){
-            const resultado = [];
-            let checagem = true;
+        if (event.key === "Enter"){
 
-            resultado[0] = document.getElementById("email").value;
-            resultado[1] = document.getElementById("password").value;
-
-            for(let contador=0; contador<2; contador++){
-
-                if (resultado[contador] === ""){
-
-                    checagem = false;
-                }
-            }
-
-            if(checagem === true){
-
-                localStorage.setItem('login', JSON.stringify(resultado));
-                console.log(resultado);
-
-                navigate("/");
-
-            } else {
-
-                document.getElementById("warning-message").style.display = "inline";
-            }
+            checkFields();
         }
     }
 
@@ -73,6 +80,14 @@ function Login_Content(){
                         onKeyDown={clickPress}/>
                 </div>
             </form>
+            <div style={{padding: "10px"}}></div>
+            <div className="profile-button" style={{width: "70%", marginLeft: "15%"}}> 
+                <Link onClick={checkFields} to="/" className='link-profile'>
+                    <center>
+                        Log In
+                    </center>
+                </Link>
+            </div>
         </div>
         <div style={{padding: "10px"}}></div>
         <div className="account-links">
@@ -89,51 +104,58 @@ function SignUp_Content(){
 
     const navigate = useNavigate();
 
+    const checkFields = (event) => {
+
+        const resultado = [];
+        let checagem = true;
+
+        resultado[0] = document.getElementById("email").value;
+        resultado[1] = document.getElementById("password").value;
+        resultado[2] = document.getElementById("confirm-password").value;
+        resultado[3] = document.getElementById("cpf").value;
+
+        for(let contador=0; contador<4; contador++){
+
+            if (resultado[contador] === ""){
+
+                document.getElementById("warning-message").innerHTML = "All fields need to be filled in.";
+                checagem = false;
+            }
+        }
+        if(!document.getElementById("terms-conditions").checked){
+                
+            document.getElementById("warning-message").innerHTML = "You need to agree with our terms and conditions.";
+            checagem = false;
+        }
+
+        if(resultado[1] !== resultado[2]){
+
+            document.getElementById("warning-message").innerHTML = "You typed two different passwords.";
+            checagem = false;
+        }
+
+        if(checagem === true){
+
+            resultado.splice(2, 1);
+
+            console.log(resultado);
+
+            localStorage.setItem('login', JSON.stringify(resultado));
+
+            navigate("/");
+
+        } else {
+            console.log("A");
+            event.preventDefault();
+            document.getElementById("warning-message").style.display = "inline";
+        }
+    }
+
     const clickPress = (event) => {
 
-        if(event.key === "Enter"){
+        if (event.key === "Enter"){
 
-            const resultado = [];
-            let checagem = true;
-
-            resultado[0] = document.getElementById("email").value;
-            resultado[1] = document.getElementById("password").value;
-            resultado[2] = document.getElementById("confirm-password").value;
-
-            for(let contador=0; contador<3; contador++){
-
-                if (resultado[contador] === ""){
-
-                    document.getElementById("warning-message").innerHTML = "All fields need to be filled in.";
-                    checagem = false;
-                }
-            }
-            if(!document.getElementById("terms-conditions").checked){
-                
-                document.getElementById("warning-message").innerHTML = "You need to agree with our terms and conditions.";
-                checagem = false;
-            }
-
-            if(resultado[1] !== resultado[2]){
-
-                document.getElementById("warning-message").innerHTML = "You typed two different passwords.";
-                checagem = false;
-            }
-
-            if(checagem === true){
-
-                resultado.splice(2, 1);
-
-                console.log(resultado);
-
-                localStorage.setItem('login', JSON.stringify(resultado));
-
-                navigate("/");
-
-            } else {
-
-                document.getElementById("warning-message").style.display = "inline";
-            }
+            checkFields();
         }
     }
 
@@ -166,6 +188,12 @@ function SignUp_Content(){
                 </div>
                 <div style={{padding: "10px"}}></div>
                 <div className="form-group">
+                    <label for="cpf">CPF</label>
+                    <input type="text" class="form-control" id="cpf" placeholder="CPF"
+                        onKeyDown={clickPress}/>
+                </div>
+                <div style={{padding: "10px"}}></div>
+                <div className="form-group">
                     <input type="checkbox" id="terms-conditions" name="terms-conditions" value="terms-conditions"/>
                     <label for="terms-conditions"> I agree with any terms and conditions.</label>
                 </div>
@@ -175,6 +203,14 @@ function SignUp_Content(){
                     <label for="receive-email"> I wish to receive the latest fashion on my email box.</label>
                 </div>
             </form>
+            <div style={{padding: "10px"}}></div>
+            <div className="profile-button" style={{width: "70%", marginLeft: "15%"}}> 
+                <Link onClick={checkFields} to="/" className='link-profile'>
+                    <center>
+                        Create Account
+                    </center>
+                </Link>
+            </div>
         </div>
         <div style={{padding: "10px"}}></div>
         </>
@@ -192,7 +228,7 @@ function ForgotPassword_Content(){
             <form>
                 <center><p>Please, type your email to receive a temporary password.</p></center>
                 <div className="form-group">
-                    <label for="email">Email address*</label>
+                    <label for="email">Email address</label>
                     <input type="email" class="form-control" id="email" placeholder="Email"/>
                 </div>
             </form>
