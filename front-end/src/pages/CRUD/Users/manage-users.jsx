@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../bootstrap.scss";
 
 export function Users() {
-    const [content, setContent] = useState(<UserList showForm={showForm}/>);
+    const [content, setContent] = useState(<UserList showForm={showForm} />);
 
     function showList() {
         setContent(<UserList showForm={showForm} />);
@@ -23,7 +23,7 @@ function UserList(props) {
     const [users, setUsers] = useState([]);
 
     function fetchUsers() {
-        fetch("http://localhost:3002/users")
+        fetch("http://localhost:3001/user")
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Unexpected Server Response");
@@ -39,11 +39,11 @@ function UserList(props) {
     useEffect(() => fetchUsers(), []);
 
     function deleteUser(id) {
-        fetch("http://localhost:3002/users/" + id, {
+        fetch("http://localhost:3001/user/" + id, {
             method: "DELETE"
         })
-        .then((response) => response.json())
-        .then((data) => fetchUsers());
+            .then((response) => response.json())
+            .then((data) => fetchUsers());
     }
 
     return (
@@ -56,24 +56,27 @@ function UserList(props) {
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Username</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Age</th>
+                        <th>Telephone</th>
+                        <th>CPF</th>
                         <th>Password</th>
-                        <th>Created At</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         users.map((user, index) => {
+                            console.log(user)
                             return (
                                 <tr key={index}>
-                                    <td>{user.id}</td>
+                                    <td>{user._id}</td>
+                                    <td>{user.userName}</td>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
-                                    <td>{user.age}</td>
+                                    <td>{user.tel}</td>
+                                    <td>{user.cpf}</td>
                                     <td>{user.password}</td>
-                                    <td>{user.createdAt}</td>
                                     <td style={{ width: "10px", whiteSpace: "nowrap" }}>
                                         <button onClick={() => props.showForm(user)} type="button" className="btn btn-primary btn-sm me-2">Edit</button>
                                         <button onClick={() => deleteUser(user.id)} type="button" className="btn btn-danger btn-sm">Delete</button>
@@ -96,24 +99,14 @@ function UserForm(props) {
         event.preventDefault();
 
         const formData = new FormData(event.target);
-        
-        const user = Object.fromEntries(formData.entries());
-        
-        if (!user.name || !user.email || !user.age || !user.password) {
-            console.log("Please provide all the required information!");
-            setErrorMessage(
-                <div className="alert alert-warning" role="alert">
-                    Please provide all the required information!
-                </div>
-            )
-            return;
-        }
 
-        console.log( props.user.id)
+        const user = Object.fromEntries(formData.entries());
+
+        console.log(props.user.id)
         console.log(typeof props.user.id)
 
         if (props.user.id) {
-            fetch("http://localhost:3002/users/" + props.user.id, {
+            fetch("http://localhost:3001/user/" + props.user.id, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"
@@ -134,7 +127,7 @@ function UserForm(props) {
         else {
             user.createdAt = new Date().toISOString().slice(0, 10);
 
-            fetch("http://localhost:3002/users", {
+            fetch("http://localhost:3001/user", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -184,9 +177,16 @@ function UserForm(props) {
                     </div>
 
                     <div className="_row mb-3">
-                        <label className="col-sm-4 col-form-label">Age</label>
+                        <label className="col-sm-4 col-form-label">Telephone</label>
                         <div className="col-sm-8">
-                            <input className="form-control" name="age" defaultValue={props.user.age} />
+                            <input className="form-control" name="tel" defaultValue={props.user.tel} />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">CPF</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" name="cpf" defaultValue={props.user.cpf} />
                         </div>
                     </div>
 
@@ -194,6 +194,13 @@ function UserForm(props) {
                         <label className="col-sm-4 col-form-label">Password</label>
                         <div className="col-sm-8">
                             <input className="form-control" type="password" name="password" defaultValue={props.user.password} />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Confirm Password</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" type="confirmPassword" name="confirmPassword" defaultValue={props.user.confirmPassword} />
                         </div>
                     </div>
 

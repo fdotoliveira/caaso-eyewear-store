@@ -12420,4 +12420,27 @@ fieldset:disabled .btn {
     }
 }
 
+.list-images {
+    display: flex;
+    flex-direction: column;
+    max-height: 120px;
+    overflow-y: auto;
+    gap: 4px;
+    align-items: center;
+}
+
+.img-item-edit {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    align-items: center;
+    background-color: rgba(22, 22, 22, 0.15);
+    padding-right: 2px;
+    border-radius: 4px;
+}
+
+.delete-img-item {
+    cursor: pointer;
+}
+
 /*# sourceMappingURL=bootstrap.min.css.map */
