@@ -9,7 +9,7 @@ import axios from "axios";
 
 const Product = () => {
   const id = useParams().id;
-  const [selectedImg, setSelectedImg] = useState("img");
+  const [selectedImg, setSelectedImg] = useState("image1");
   const [quantity, setQuantity] = useState(1);
   const [currentProduct, setCurrentProduct] = useState(null);
   const dispatch = useDispatch();
@@ -39,13 +39,13 @@ const Product = () => {
     <div className="product">
       <div className="left">
         <div className="images">
-          <img src={currentProduct.img} alt={currentProduct.title} onClick={() => handleImageClick("img")} />
-          <img src={currentProduct.img2} alt={currentProduct.title} onClick={() => handleImageClick("img2")} />
-          <img src={currentProduct.img3} alt={currentProduct.title} onClick={() => handleImageClick("img3")} />
-          <img src={currentProduct.img4} alt={currentProduct.title} onClick={() => handleImageClick("img4")} />
+          <img src={currentProduct.product.image1} alt={currentProduct.product.title} onClick={() => handleImageClick("image1")} />
+          <img src={currentProduct.product.image2} alt={currentProduct.product.title} onClick={() => handleImageClick("image2")} />
+          <img src={currentProduct.product.image3} alt={currentProduct.product.title} onClick={() => handleImageClick("image3")} />
+          <img src={currentProduct.product.image4} alt={currentProduct.product.title} onClick={() => handleImageClick("image4")} />
         </div>
         <div className="mainImg">
-          <img src={currentProduct[selectedImg]} alt={currentProduct.title} />
+          <img src={currentProduct.product[selectedImg]} alt={currentProduct.product.title} />
         </div>
       </div>
       <div className="right">
