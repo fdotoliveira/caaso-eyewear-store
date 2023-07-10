@@ -55,7 +55,7 @@ function UserList(props) {
             <table className="table">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        {/* <th>ID</th> */}
                         <th>Username</th>
                         <th>Name</th>
                         <th>Email</th>
@@ -67,10 +67,10 @@ function UserList(props) {
                 <tbody>
                     {
                         users.map((user, index) => {
-                            console.log(user)
+                            user = user.user
                             return (
                                 <tr key={index}>
-                                    <td>{user._id}</td>
+                                    {/* <td>{user._id}</td> */}
                                     <td>{user.userName}</td>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
@@ -79,7 +79,7 @@ function UserList(props) {
                                     <td>{user.password}</td>
                                     <td style={{ width: "10px", whiteSpace: "nowrap" }}>
                                         <button onClick={() => props.showForm(user)} type="button" className="btn btn-primary btn-sm me-2">Edit</button>
-                                        <button onClick={() => deleteUser(user.id)} type="button" className="btn btn-danger btn-sm">Delete</button>
+                                        <button onClick={() => deleteUser(user._id)} type="button" className="btn btn-danger btn-sm">Delete</button>
                                     </td>
                                 </tr>
 
@@ -102,12 +102,19 @@ function UserForm(props) {
 
         const user = Object.fromEntries(formData.entries());
 
-        console.log(props.user.id)
-        console.log(typeof props.user.id)
+        if (!user.userName || !user.email || !user.password || user.confirmedPassword) {
+            console.log("Please provide all the required information!");
+            setErrorMessage(
+                <div className="alert alert-warning" role="alert">
+                    Please provide all the required information!
+                </div>
+            )
+            return;
+        }
 
-        if (props.user.id) {
-            fetch("http://localhost:3001/user/" + props.user.id, {
-                method: "PATCH",
+        if (props.user._id) {
+            fetch("http://localhost:3001/user/" + props.user._id, {
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -125,8 +132,7 @@ function UserForm(props) {
                 });
         }
         else {
-            user.createdAt = new Date().toISOString().slice(0, 10);
-
+            console.log(user)
             fetch("http://localhost:3001/user", {
                 method: "POST",
                 headers: {
@@ -149,30 +155,16 @@ function UserForm(props) {
 
     return (
         <>
-            <h2 className="text-center mb-3">{props.user.id ? "Edit user" : "Create New user"}</h2>
+            <h2 className="text-center mb-3">{props.user._id ? "Edit user" : "Create New user"}</h2>
 
             {errorMessage}
 
             <div className="col-lg-6 mx-auto">
                 <form onSubmit={(event) => handleSubmit(event)}>
-                    {props.user.id && <div className="_row mb-3">
-                        <label className="col-sm-4 col-form-label">ID</label>
-                        <div className="col-sm-8">
-                            <input readOnly className="form-control-plaintext" name="id" defaultValue={props.user.id} />
-                        </div>
-                    </div>}
-
                     <div className="_row mb-3">
                         <label className="col-sm-4 col-form-label">Name</label>
                         <div className="col-sm-8">
                             <input className="form-control" name="name" defaultValue={props.user.name} />
-                        </div>
-                    </div>
-
-                    <div className="_row mb-3">
-                        <label className="col-sm-4 col-form-label">Email</label>
-                        <div className="col-sm-8">
-                            <input className="form-control" name="email" defaultValue={props.user.email} />
                         </div>
                     </div>
 
@@ -193,14 +185,14 @@ function UserForm(props) {
                     <div className="_row mb-3">
                         <label className="col-sm-4 col-form-label">Password</label>
                         <div className="col-sm-8">
-                            <input className="form-control" type="password" name="password" defaultValue={props.user.password} />
+                            <input className="form-control" type="password" name="password" />
                         </div>
                     </div>
 
                     <div className="_row mb-3">
                         <label className="col-sm-4 col-form-label">Confirm Password</label>
                         <div className="col-sm-8">
-                            <input className="form-control" type="confirmPassword" name="confirmPassword" defaultValue={props.user.confirmPassword} />
+                            <input className="form-control" type="password" name="confirmPassword" />
                         </div>
                     </div>
 

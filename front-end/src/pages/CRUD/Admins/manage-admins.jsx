@@ -23,7 +23,7 @@ function AdminList(props) {
     const [admins, setAdmins] = useState([]);
 
     function fetchAdmins() {
-        fetch("http://localhost:3003/admins")
+        fetch("http://localhost:3001/admin")
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Unexpected Server Response");
@@ -39,7 +39,7 @@ function AdminList(props) {
     useEffect(() => fetchAdmins(), []);
 
     function deleteAdmin(id) {
-        fetch("http://localhost:3003/admins/" + id, {
+        fetch("http://localhost:3001/admins/" + id, {
             method: "DELETE"
         })
             .then((response) => response.json())
@@ -55,26 +55,29 @@ function AdminList(props) {
             <table className="table">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Username</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Telephone</th>
+                        <th>CPF</th>
                         <th>Password</th>
-                        <th>Created At</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         admins.map((admin, index) => {
+                            admin = admin.user
                             return (
                                 <tr key={index}>
-                                    <td>{admin.id}</td>
+                                    <td>{admin.userName}</td>
                                     <td>{admin.name}</td>
                                     <td>{admin.email}</td>
+                                    <td>{admin.tel}</td>
+                                    <td>{admin.cpf}</td>
                                     <td>{admin.password}</td>
-                                    <td>{admin.createdAt}</td>
                                     <td style={{ width: "10px", whiteSpace: "nowrap" }}>
                                         <button onClick={() => props.showForm(admin)} type="button" className="btn btn-primary btn-sm me-2">Edit</button>
-                                        <button onClick={() => deleteAdmin(admin.id)} type="button" className="btn btn-danger btn-sm">Delete</button>
+                                        <button onClick={() => deleteAdmin(admin._id)} type="button" className="btn btn-danger btn-sm">Delete</button>
                                     </td>
                                 </tr>
 
@@ -97,7 +100,7 @@ function AdminForm(props) {
 
         const admin = Object.fromEntries(formData.entries());
 
-        if (!admin.name || !admin.email || !admin.password) {
+        if (!admin.userName || !admin.email || !admin.password || admin.confirmedPassword) {
             console.log("Please provide all the required information!");
             setErrorMessage(
                 <div className="alert alert-warning" role="alert">
@@ -107,12 +110,9 @@ function AdminForm(props) {
             return;
         }
 
-        console.log(props.admin.id)
-        console.log(typeof props.admin.id)
-
-        if (props.admin.id) {
-            fetch("http://localhost:3003/admins/" + props.admin.id, {
-                method: "PATCH",
+        if (props.admin._id) {
+            fetch("http://localhost:3001/user/" + props.admin._id, {
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -130,9 +130,7 @@ function AdminForm(props) {
                 });
         }
         else {
-            admin.createdAt = new Date().toISOString().slice(0, 10);
-
-            fetch("http://localhost:3003/admins", {
+            fetch("http://localhost:3001/admin", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -154,23 +152,16 @@ function AdminForm(props) {
 
     return (
         <>
-            <h2 className="text-center mb-3">{props.admin.id ? "Edit Admin" : "Create New Admin"}</h2>
+            <h2 className="text-center mb-3">{props.admin._id ? "Edit Admin" : "Create New Admin"}</h2>
 
             {errorMessage}
 
             <div className="col-lg-6 mx-auto">
                 <form onSubmit={(event) => handleSubmit(event)}>
-                    {props.user.id && <div className="_row mb-3">
-                        <label className="col-sm-4 col-form-label">ID</label>
-                        <div className="col-sm-8">
-                            <input readOnly className="form-control-plaintext" name="id" defaultValue={props.admin.id} />
-                        </div>
-                    </div>}
-
                     <div className="_row mb-3">
-                        <label className="col-sm-4 col-form-label">Name</label>
+                        <label className="col-sm-4 col-form-label">Username</label>
                         <div className="col-sm-8">
-                            <input className="form-control" name="name" defaultValue={props.admin.name} />
+                            <input className="form-control" name="userName" defaultValue={props.admin.userName}  />
                         </div>
                     </div>
 
@@ -184,10 +175,16 @@ function AdminForm(props) {
                     <div className="_row mb-3">
                         <label className="col-sm-4 col-form-label">Password</label>
                         <div className="col-sm-8">
-                            <input className="form-control" type="password" name="password" defaultValue={props.admin.password} />
+                            <input className="form-control" type="password" name="password" />
                         </div>
                     </div>
 
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Confirm Password</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" type="password" name="confirmPassword" />
+                        </div>
+                    </div>
 
                     <div className="_row">
                         <div className="offset-sm-4 col-sm-4 d-grid">

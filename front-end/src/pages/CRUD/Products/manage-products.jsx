@@ -61,7 +61,7 @@ function ProductList(props) {
             <table className="table">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        {/* <th>ID</th> */}
                         <th>Title</th>
                         <th>Type</th>
                         <th>Price</th>
@@ -74,7 +74,7 @@ function ProductList(props) {
                         products.map((product, index) => {
                             return (
                                 <tr key={index}>
-                                    <td>{product._id}</td>
+                                    {/* <td>{product._id}</td> */}
                                     <td>{product.title}</td>
                                     <td>{product.type}</td>
                                     <td>{product.price}</td>
