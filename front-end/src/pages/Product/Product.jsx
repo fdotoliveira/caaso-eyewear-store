@@ -76,7 +76,7 @@ const Product = () => {
                 title: currentProduct.product.title,
                 desc: currentProduct.product.desc,
                 price: currentProduct.product.price,
-                img: currentProduct.product.img,
+                img: currentProduct.product.image1,
                 quantity,
               })
             )
