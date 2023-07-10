@@ -6,8 +6,6 @@ import { removeItem, resetCart } from "../../redux/cartReducer";
 import { useDispatch } from "react-redux";
 import {Link} from "react-router-dom";
 
-
-
 const Cart = () => {
   const products = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
@@ -26,7 +24,7 @@ const Cart = () => {
       <>
         <h1>Products in your cart</h1>
         {products.map((item) => (
-          <div className="item" key={item.id}>
+          <div className="item" key={item._id}>
             <img src={item.img} alt="" />
             <div className="details">
               <h1>{item.title}</h1>

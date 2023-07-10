@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import "./Contact.scss";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -7,13 +8,25 @@ import GoogleIcon from "@mui/icons-material/Google";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 
 const Contact = () => {
+  const [email, setEmail] = useState("");
+
+  const handleJoinUs = () => {
+    setEmail("");
+  };
+
   return (
     <div className="contact">
       <div className="wrapper">
         <span>BE IN TOUCH WITH US:</span>
         <div className="mail">
-          <input type="text" placeholder="EMAIL ADDRESS" />
-          <button>JOIN US</button>
+          
+          <input
+            type="text"
+            placeholder="EMAIL ADDRESS"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button onClick={handleJoinUs}>JOIN US</button>
         </div>
         <div className="icons">
           <a href="https://www.facebook.com/" target="_blank">

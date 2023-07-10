@@ -5,20 +5,27 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartReducer";
-import db from "../../db.json";
-
+import axios from "axios";
 
 const Product = () => {
   const id = useParams().id;
   const [selectedImg, setSelectedImg] = useState("img");
   const [quantity, setQuantity] = useState(1);
-
-  const currentProduct = useMemo(() => {
-    const product = db.products.find((product) => product.id === parseInt(id));
-    return product;
-  }, [id]);
-
+  const [currentProduct, setCurrentProduct] = useState(null);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/product/${id}`);
+        setCurrentProduct(response.data);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
 
   if(!currentProduct) {
     return <div>Loading...</div>;
@@ -42,34 +49,34 @@ const Product = () => {
         </div>
       </div>
       <div className="right">
-        <h1>{currentProduct.title}</h1>
-        <span className="price">${currentProduct.price}</span>
-        <p>{currentProduct.desc}</p>
+        <h1>{currentProduct.product.title}</h1>
+        <span className="price">${currentProduct.product.price}</span>
+        <p>{currentProduct.product.desc}</p>
         <div className="quantity">
           <button onClick={() => setQuantity(prev => (prev === 1 ? 1 : prev - 1))}>
             -
           </button>
           {quantity}
-          <button onClick={() => setQuantity(prev => prev + 1)} disabled={quantity === currentProduct.qty}>
+          <button onClick={() => setQuantity(prev => prev + 1)} disabled={quantity === currentProduct.product.stock}>
             +
           </button>
         </div>
         <div className="info">
           <span style={{ fontSize: 'larger', fontWeight: 'bold' }}>
-            Available stock: {currentProduct.qty}
+            Available stock: {currentProduct.product.stock}
           </span>
-          <span>Product Type: {currentProduct.type}, {currentProduct.categorie}</span>
+          <span>Product Type: {currentProduct.product.type}, {currentProduct.product.category}</span>
         </div>
         <button
           className="add"
           onClick={() =>
             dispatch(
               addToCart({
-                id: currentProduct.id,
-                title: currentProduct.title,
-                desc: currentProduct.desc,
-                price: currentProduct.price,
-                img: currentProduct.img,
+                id: currentProduct.product._id,
+                title: currentProduct.product.title,
+                desc: currentProduct.product.desc,
+                price: currentProduct.product.price,
+                img: currentProduct.product.img,
                 quantity,
               })
             )

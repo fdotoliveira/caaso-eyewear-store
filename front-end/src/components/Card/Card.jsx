@@ -1,29 +1,48 @@
 import React from "react";
+import { useState, useEffect, useRef } from "react";
 import "./Card.scss";
 import { Link } from "react-router-dom";
-import db from "../../products-db.json";
-
 
 const Card = ({ item }) => {
-  //console.log(item);
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/product");
+        const data = await response.json();
+        const foundProduct = data.find((product) => product._id === item._id);
+        setProduct(foundProduct);
+      } catch (error) {
+        console.log("Error fetching product:", error);
+      }
+    };
+
+    fetchProduct();
+  }, [item._id]);
+
+  if (!product) {
+    return null; // Ou algum indicador de carregamento
+  }
+
   return (
-    <Link className="link" to={`/product/${item.id}`}>
+    <Link className="link" to={`/product/${product._id}`}>
       <div className="card">
         <div className="image">
           <img
-            src={item.img}
-            alt={item.title}
+            src={product.img}
+            alt={product.title}
             className="mainImg"
           />
           <img
-            src={item.img2}
-            alt={item.title}
+            src={product.img2}
+            alt={product.title}
             className="secondImg"
           />
         </div>
-        <h2>{item.title}</h2>
+        <h2>{product.title}</h2>
         <div className="prices">
-          <h3>${item.price}</h3>
+          <h3>${product.price}</h3>
         </div>
       </div>
     </Link>

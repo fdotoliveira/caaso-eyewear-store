@@ -1,32 +1,52 @@
 import React from "react";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import "./List.scss";
 import Card from "../Card/Card";
-import db from "../../db.json";
-
+import axios from "axios";
 
 const List = ({ subCats, maxPrice, sort, catId, type}) => { 
+  const [products, setProducts] = useState([]);
   const combinedIds = subCats.join(",");
   const individualIds = combinedIds.split(",");
-  const transformedSubCats = individualIds.map((id) => parseInt(id, 10));
+  const transformedSubCats = subCats
+    .flatMap((cat) => cat.split(",")) // separa os tipos por vírgula
+    .map((cat) => cat.trim()) // remove os espaços em branco em torno dos tipos
+    .filter((cat, index, self) => self.indexOf(cat) === index); // filtra apenas os tipos únicos
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/product/`, {
+          params: {
+            type,
+            maxPrice,
+            category: subCats, // Use transformedSubCats instead of subCats
+          },
+        });
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+      }
+    };
+
+    fetchProducts();
+  }, [transformedSubCats, maxPrice, type]);
 
   const filteredProducts = useMemo(() => {
     if (subCats.length === 0) {
-      //return catId; // Retorna um array contendo apenas o catId
-      return db.products.filter(
+      return products.filter(
         (product) =>
           product.type === type &&
           product.price <= maxPrice
       );
-    }
-
-    return db.products.filter(
+    }    
+    return products.filter(
       (product) =>
         product.type === type &&
-        (transformedSubCats.length === 0 || transformedSubCats.includes(product.id)) &&
+        (transformedSubCats.length === 0 || transformedSubCats.includes(product.category)) &&
         product.price <= maxPrice
     );
-  }, [db.products, transformedSubCats, maxPrice, subCats]);
+  }, [products, transformedSubCats, maxPrice, type]);
 
   const sortedProducts = useMemo(() => {
     if (sort === "asc") {
@@ -37,13 +57,13 @@ const List = ({ subCats, maxPrice, sort, catId, type}) => {
     return filteredProducts;
   }, [filteredProducts, sort]);
 
-  
+
   return (
     <div className="list">
       {subCats.length > 0 ? (
-        sortedProducts.map((item) => <Card item={item} key={item.id} />)
+        sortedProducts.map((item) => <Card item={item} key={item._id} />)
       ) : (
-        sortedProducts.map((item) => <Card item={item} key={item.id} />)
+        sortedProducts.map((item) => <Card item={item} key={item._id} />)
       )}
     </div>
   );

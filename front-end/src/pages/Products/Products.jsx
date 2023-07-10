@@ -3,15 +3,14 @@ import { useState, useEffect, useRef } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import List from "../../components/List/List";
 import "./Products.scss";
-import db from "../../db.json";
-
+import axios from "axios";
 
 const Products = () => {
   const catId = parseInt(useParams().id);
   const [maxPrice, setMaxPrice] = useState(3000);
   const [sort, setSort] = useState(null);
   const [selectedSubCats, setSelectedSubCats] = useState([]);
-  const categoryMap = {};
+  const [categoryMap, setCategoryMap] = useState({});
 
   const location = useLocation();
   const lowestFirstRef = useRef(null);
@@ -46,27 +45,44 @@ const Products = () => {
   useEffect(() => {
     setMaxPrice(3000);
   }, [catId]);
-
   
-  let category;
+  let type;
+  let currentProduct;
 
   if(catId === 1) {
-    category = "Eyeglasses";
+    type = "Eyeglasses";
   } else if(catId === 2) {
-    category = "Sunglasses";
+    type = "Sunglasses";
   } else if(catId === 3) {
-    category = "Accessories";
+    type = "Accessories";
   }
   
-  const currentProduct = db.products.filter((product) => product.type === category);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/product/", {
+          params: {
+            type: type,
+          },
+        });
+        const { data } = response;
+        const categoryProducts = data.filter((product) => product.type === type);
+        const newCategoryMap = {};
+        categoryProducts.forEach((product) => {
+          if (!newCategoryMap[product.category]) {
+            newCategoryMap[product.category] = [product.category];
+          } else {
+            newCategoryMap[product.category].push(product.category);
+          }
+        });
+        setCategoryMap(newCategoryMap);
+      } catch (error) {
+        console.log("Error fetching products:", error);
+      }
+    };
 
-  currentProduct.forEach((product) => {
-    if (!categoryMap[product.categorie]) {
-      categoryMap[product.categorie] = [product.id];
-    } else {
-      categoryMap[product.categorie].push(product.id);
-    }
-  });  
+    fetchProducts();
+  }, [type]);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -85,23 +101,22 @@ const Products = () => {
 
   const handlePriceChange = (e) => {
     setMaxPrice(e.target.value);
-  };  
-
+  };       
 
   return (
     <div className="products">
       <div className="left">
         <div className="filterItem">
           <h2>Product Categories</h2>
-          {Object.entries(categoryMap).map(([categorie, ids]) => (
-            <div className="inputItem" key={categorie}>
+          {Object.entries(categoryMap).map(([category, ids]) => (
+            <div className="inputItem" key={category}>
               <input
                 type="checkbox"
-                id={categorie}
+                id={category}
                 value={ids}
                 onChange={handleChange}
               />
-              <label htmlFor={categorie}>{categorie}</label>
+              <label htmlFor={category}>{category}</label>
             </div>
             ))}
         </div>
@@ -153,7 +168,7 @@ const Products = () => {
           maxPrice={maxPrice}
           sort={sort}
           catId={currentProduct}
-          type={category}
+          type={type}
         />
       </div>
     </div>
