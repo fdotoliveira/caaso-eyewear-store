@@ -13,9 +13,9 @@ const STATUS_CODE_UNAUTHORIZED = 401;
 const STATUS_CODE_INTERNAL_SERVER_ERROR = 500;
 
 const authToken = async (token) => {
-    if (util.isEmpty(token)) 
-    return null;
-    
+    if (util.isEmpty(token))
+        return null;
+
     let Token = null;
     try {
         Token = await utilToken.verify(token);
@@ -23,10 +23,10 @@ const authToken = async (token) => {
         console.log(error)
         return null;
     }
-    
+
     try {
         const userFound = await UserSchema.findById(Token.id);
-        
+
         return userFound;
     } catch (erro) {
         console.log(erro);
@@ -36,7 +36,7 @@ const authToken = async (token) => {
 
 exports.isAdmin = async (req, res) => {
     const user = await authToken(req.params.token);
-    if(user === null) {
+    if (user === null) {
         return res.status(STATUS_CODE_UNAUTHORIZED).json({ message: "Não autorizado." });
     }
 
@@ -46,55 +46,55 @@ exports.isAdmin = async (req, res) => {
 exports.authUser = async (req, res) => {
     const { userName, password } = req.body;
 
-    if(userName === "admin") {
-        if(password !== "admin") {
+    if (userName === "admin") {
+        if (password !== "admin") {
             return res.status(STATUS_CODE_ERROR).send({ message: "Usuário ou senha incorretos." });
         }
 
         let userAdmin = await UserSchema.findOne({ userName: userName });
-        if(userAdmin === null) {
+        if (userAdmin === null) {
             const salt = await bcrypt.genSalt(10);
             const encryptedPassword = await bcrypt.hash("admin", salt);
-            
+
             userAdmin = await new UserSchema({
                 userName: "admin",
                 email: "admin@admin.com",
                 password: encryptedPassword,
                 admin: true
             });
-            
+
             await userAdmin.save();
         }
         userAdmin = await UserSchema.findOne({ userName: userName });
         const token = utilToken.generate(userAdmin._id);
         res.cookie("token", token);
-        return res.status(STATUS_CODE_OK).send({ 
+        return res.status(STATUS_CODE_OK).send({
             message: "Admin logado com sucesso.",
             token: token
         });
     }
-    
-    if(util.isEmpty(userName) || util.isEmpty(password)) {
+
+    if (util.isEmpty(userName) || util.isEmpty(password)) {
         return res.status(STATUS_CODE_ERROR).send({ message: "Dados insuficientes." });
     }
     let user = null;
-    
+
     try {
-        if(userName.includes("@")) user = await UserSchema.findOne({ email: userName });
+        if (userName.includes("@")) user = await UserSchema.findOne({ email: userName });
         else user = await UserSchema.findOne({ userName: userName });
 
         //TODO:
         //se não achar tem que procurar nos admins
-    } catch(e) {
+    } catch (e) {
         console.log(e);
         return res.status(STATUS_CODE_INTERNAL_SERVER_ERROR).json({ message: "Erro ao fazer login." });
     }
 
-    if(!util.isEmpty(user) && (await user.matchPassword(password))) {
+    if (!util.isEmpty(user) && (await user.matchPassword(password))) {
         const token = utilToken.generate(user._id);
         res.cookie("token", token);
-        
-        res.status(STATUS_CODE_OK).send({ 
+
+        res.status(STATUS_CODE_OK).send({
             message: "Logado com sucesso.",
             user: user,
             token: token
@@ -112,24 +112,24 @@ const validateEmail = (email) => {
 exports.createAdm = async (req, res) => {
     const { userName, email, password, confirmPassword, auth } = req.body;
     const user = await authToken(auth);
-    if(user === null || user.admin === undefined || user.admin === false) {
+    if (user === null || user.admin === undefined || user.admin === false) {
         return res.status(STATUS_CODE_UNAUTHORIZED).json({ message: "Não autorizado." });
     }
 
-    if(util.isEmpty(userName) || util.isEmpty(email) || util.isEmpty(password) || util.isEmpty(confirmPassword)) {
+    if (util.isEmpty(userName) || util.isEmpty(email) || util.isEmpty(password) || util.isEmpty(confirmPassword)) {
         return res.status(STATUS_CODE_ERROR).send({ message: "Dados insuficientes." });
     }
-    
-    if(!validateEmail(email)) {
+
+    if (!validateEmail(email)) {
         return res.status(STATUS_CODE_ERROR).send({ message: "O email não está no formato correto." });
     }
-    
-    if(password !== confirmPassword) {
+
+    if (password !== confirmPassword) {
         return res.status(STATUS_CODE_ERROR).send({ message: "A senha e a senha de confirmação são diferentes." });
     }
 
-    const userExist = await UserSchema.findOne({$or:[{userName: userName},{email:email}]});
-    if(!util.isEmpty(userExist))
+    const userExist = await UserSchema.findOne({ $or: [{ userName: userName }, { email: email }] });
+    if (!util.isEmpty(userExist))
         return res.status(STATUS_CODE_ERROR).send({ message: "Usuário ou email já existente." });
 
     const salt = await bcrypt.genSalt(10);
@@ -145,7 +145,7 @@ exports.createAdm = async (req, res) => {
     try {
         await newUser.save();
 
-        res.status(STATUS_CODE_OK).json({ 
+        res.status(STATUS_CODE_OK).json({
             message: "Adm salvo com sucesso!",
         });
     } catch (error) {
@@ -158,22 +158,23 @@ exports.createAdm = async (req, res) => {
 };
 
 exports.create = async (req, res) => {
-    const { userName, name, email, password, confirmPassword } = req.body;
+    const { userName, name, email, tel, cpf, password, confirmPassword } = req.body;
 
-    if(util.isEmpty(userName) || util.isEmpty(name) || util.isEmpty(email) || util.isEmpty(password) || util.isEmpty(confirmPassword)) {
+    if (util.isEmpty(userName) || util.isEmpty(name) || util.isEmpty(email) || util.isEmpty(password) || util.isEmpty(confirmPassword)) {
         return res.status(STATUS_CODE_ERROR).send({ message: "Dados insuficientes." });
     }
-    
-    if(!validateEmail(email)) {
+
+
+    if (!validateEmail(email)) {
         return res.status(STATUS_CODE_ERROR).send({ message: "O email não está no formato correto." });
     }
-    
-    if(password !== confirmPassword) {
+
+    if (password !== confirmPassword) {
         return res.status(STATUS_CODE_ERROR).send({ message: "A senha e a senha de confirmação são diferentes." });
     }
 
-    const userExist = await UserSchema.findOne({$or:[{userName: userName},{email:email}]});
-    if(!util.isEmpty(userExist))
+    const userExist = await UserSchema.findOne({ $or: [{ userName: userName }, { email: email }] });
+    if (!util.isEmpty(userExist))
         return res.status(STATUS_CODE_ERROR).send({ message: "Usuário ou email já existente." });
 
     const salt = await bcrypt.genSalt(10);
@@ -183,6 +184,8 @@ exports.create = async (req, res) => {
         userName: userName,
         name: name,
         email: email,
+        tel: tel,
+        cpf: cpf,
         password: encryptedPassword,
         admin: false
     });
@@ -190,12 +193,12 @@ exports.create = async (req, res) => {
     try {
         await newUser.save();
 
-        const token = utilToken.generate(newUser._id);
-        res.cookie("token", token);
+        // const token = utilToken.generate(newUser._id);
+        // res.cookie("token", token);
 
-        console.log("token feito")
+        // console.log("token feito")
 
-        res.status(STATUS_CODE_OK).json({ 
+        res.status(STATUS_CODE_OK).json({
             message: "Usuário salvo com sucesso!",
             user: {
                 name: newUser.name,
@@ -217,12 +220,12 @@ exports.remove = async (req, res) => {
 
         if (!user)
             return res.status(STATUS_CODE_NO_CONTENT).json({ message: "Usuário não encontrado." });
-        if(user.image !== undefined && user.image !== null) {
+        if (user.image !== undefined && user.image !== null) {
             const image = await ImageSchema.findById(user.image);
-            if(image !== null) {
+            if (image !== null) {
                 try {
                     fs.unlinkSync(image.src);
-                } catch(e) {
+                } catch (e) {
                     console.log(e);
                 }
                 await image.deleteOne();
@@ -241,35 +244,73 @@ exports.remove = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-    const user = await authToken(req.body.auth);
-    if(user === null) {
-        return res.status(STATUS_CODE_UNAUTHORIZED).json({ message: "Não autorizado." });
+    // const user = await authToken(req.body.auth);
+    // if(user === null) {
+    //     return res.status(STATUS_CODE_UNAUTHORIZED).json({ message: "Não autorizado." });
+    // }
+
+    const { userName, name, email, tel, cpf, password, confirmPassword } = req.body;
+
+    if (util.isEmpty(userName) || util.isEmpty(email) || util.isEmpty(password) || util.isEmpty(confirmPassword)) {
+        return res.status(STATUS_CODE_ERROR).send({ message: "Dados insuficientes." });
+    }
+
+
+    if (!validateEmail(email)) {
+        return res.status(STATUS_CODE_ERROR).send({ message: "O email não está no formato correto." });
+    }
+
+    if (password !== confirmPassword) {
+        return res.status(STATUS_CODE_ERROR).send({ message: "A senha e a senha de confirmação são diferentes." });
     }
 
     const salt = await bcrypt.genSalt(10);
-    const encryptedPassword = await bcrypt.hash(req.body.password, salt);
+    const encryptedPassword = await bcrypt.hash(password, salt);
+
+    const userToUpdate = {};
+    if (!util.isEmpty(userName)) userToUpdate.userName = userName;
+    if (!util.isEmpty(name)) userToUpdate.name = name;
+    if (!util.isEmpty(email)) userToUpdate.email = email;
+    if (!util.isEmpty(tel)) userToUpdate.tel = tel;
+    if (!util.isEmpty(cpf)) userToUpdate.cpf = cpf;
+    if (!util.isEmpty(encryptedPassword)) userToUpdate.password = encryptedPassword;
+
     try {
-        await user.updateOne({
-            $set: {
-                userName: req.body.userName,
-                name: req.body.name,
-                email: req.body.email,
-                password: encryptedPassword,
-            }
+        await UserSchema.findByIdAndUpdate(req.params.id, {
+            $set: userToUpdate
         });
-        res.status(STATUS_CODE_OK).json({ message: "Usuário atualizado com sucesso." });
+        res.status(STATUS_CODE_OK).send({ message: "Usuário atualizado com sucesso." });
     } catch (error) {
-        console.log(error);
-        res.status(STATUS_CODE_ERROR).json({
+        res.status(STATUS_CODE_ERROR).send({
             message: "Erro ao atualizar o usuário.",
-            error: error
+            error: error,
+            data: userToUpdate
         });
     }
+
+    // try {
+    //     await user.updateOne({
+    //         $set: {
+    //             userName: req.body.userName,
+    //             name: req.body.name,
+    //             email: req.body.email,
+    //             password: encryptedPassword,
+    //         }
+    //     });
+    //     res.status(STATUS_CODE_OK).json({ message: "Usuário atualizado com sucesso." });
+    // } catch (error) {
+    //     console.log(error);
+    //     res.status(STATUS_CODE_ERROR).json({
+    //         message: "Erro ao atualizar o usuário.",
+    //         error: error,
+    //         data: user
+    //     });
+    // }
 };
 
 exports.updatePers = async (req, res) => {
     const user = await authToken(req.body.auth);
-    if(user === null) {
+    if (user === null) {
         return res.status(STATUS_CODE_UNAUTHORIZED).json({ message: "Não autorizado." });
     }
 
@@ -294,7 +335,7 @@ exports.updatePers = async (req, res) => {
 
 exports.updateEnd = async (req, res) => {
     const user = await authToken(req.body.auth);
-    if(user === null) {
+    if (user === null) {
         return res.status(STATUS_CODE_UNAUTHORIZED).json({ message: "Não autorizado." });
     }
 
@@ -320,14 +361,14 @@ exports.updateEnd = async (req, res) => {
 exports.updateImage = async (req, res) => {
     const user = await authToken(req.body.auth);
 
-    if(user === null) {
+    if (user === null) {
         return res.status(STATUS_CODE_UNAUTHORIZED).json({ message: "Não autorizado." });
     }
 
     const { idImage } = req.body;
-    
+
     const oldImage = await ImageSchema.findById(user.image);
-    if(oldImage !== null) {
+    if (oldImage !== null) {
         fs.unlinkSync(oldImage.src);
         oldImage.deleteOne();
     }
@@ -339,21 +380,21 @@ exports.updateImage = async (req, res) => {
         })
 
         res.status(STATUS_CODE_OK).send({ message: "Imagem linkada com o usuário com sucesso!", image: newImage });
-    } catch(e) {
+    } catch (e) {
         res.status(STATUS_CODE_ERROR).send({ message: "Não foi possível achar a nova imagem" });
     }
 };
 
 exports.updatePassword = async (req, res) => {
     const user = await authToken(req.body.auth);
-    if(user === null) {
+    if (user === null) {
         return res.status(STATUS_CODE_UNAUTHORIZED).json({ message: "Não autorizado." });
     }
-    
+
     const { oldPassword, newPassword } = req.body;
     const salt = await bcrypt.genSalt(10);
     const encryptedPassword = await bcrypt.hash(newPassword, salt);
-    
+
     // verifica a senha antiga para prosseguir a atualização
     if (!(await user.matchPassword(oldPassword))) {
         res.status(STATUS_CODE_ERROR).json({
@@ -384,15 +425,34 @@ exports.findAll = async (req, res) => {
     try {
         const data = await UserSchema.find();
         let dataMapped = [];
-        for(let i = 0; i < data.length; i++) {
-            if(data[i].admin) {
-                if(data[i].userName !== "admin")
-                    dataMapped.push({image: undefined, user: data[i]});
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].admin) {
+                if (data[i].userName !== "admin")
+                    dataMapped.push({ image: undefined, user: data[i] });
             } else {
                 const image = await ImageSchema.findById(data[i].image);
                 let imgSrc = undefined;
-                if(image !== null) imgSrc = image.src;
-                dataMapped.push({image: imgSrc, user: data[i]});
+                if (image !== null) imgSrc = image.src;
+                dataMapped.push({ image: imgSrc, user: data[i] });
+            }
+        }
+        res.status(STATUS_CODE_OK).send(dataMapped);
+    } catch (error) {
+        console.log(error);
+        res.status(STATUS_CODE_ERROR).send({
+            message: "Erro ao buscar os usuários.",
+            error: error
+        });
+    }
+};
+
+exports.findAllAdmin = async (req, res) => {
+    try {
+        const data = await UserSchema.find();
+        let dataMapped = [];
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].admin) {
+                dataMapped.push({ image: undefined, user: data[i] });
             }
         }
         res.status(STATUS_CODE_OK).send(dataMapped);
@@ -439,7 +499,7 @@ exports.clearUsers = async (req, res) => {
     try {
         const data = await UserSchema.find();
         data.forEach(async (user) => await user.deleteOne());
-        res.status(STATUS_CODE_OK).send({ message: "Todos os usuários foram apagados."});
+        res.status(STATUS_CODE_OK).send({ message: "Todos os usuários foram apagados." });
     } catch (error) {
         console.log(error);
         res.status(STATUS_CODE_ERROR).send({
@@ -451,9 +511,9 @@ exports.clearUsers = async (req, res) => {
 
 exports.getUserByToken = async (req, res) => {
     const user = await authToken(req.params.token);
-    if(user === null) {
+    if (user === null) {
         return res.status(STATUS_CODE_UNAUTHORIZED).json({ message: "Não autorizado." });
     }
     console.log(user);
-    return res.status(STATUS_CODE_OK).send({message: "Usuário buscado com sucesso!", user: user});
+    return res.status(STATUS_CODE_OK).send({ message: "Usuário buscado com sucesso!", user: user });
 };

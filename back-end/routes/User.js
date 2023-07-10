@@ -3,12 +3,13 @@ const router = express.Router();
 const UserController = require('../controllers/User')
 
 router.get('/user', UserController.findAll);
+router.get('/admin', UserController.findAllAdmin);
 router.get('/isAdmin/:token', UserController.isAdmin);
 router.get('/getUserByToken/:token', UserController.getUserByToken);
 
 router.post('/user/login', UserController.authUser);
 router.post('/user', UserController.create);
-router.post('/useradmin', UserController.createAdm);
+router.post('/admin', UserController.createAdm);
 
 router.put('/user/:id', UserController.update);
 router.put('/userEnd', UserController.updateEnd);
