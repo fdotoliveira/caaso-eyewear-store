@@ -30,12 +30,12 @@ const Card = ({ item }) => {
       <div className="card">
         <div className="image">
           <img
-            src={product.img}
+            src={product.image1}
             alt={product.title}
             className="mainImg"
           />
           <img
-            src={product.img2}
+            src={product.image2}
             alt={product.title}
             className="secondImg"
           />
