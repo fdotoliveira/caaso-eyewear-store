@@ -119,14 +119,14 @@ function Login_Content() {
             <div className="input-content">
                 <form onSubmit={(event) => handleLogin(event)}>
                     <div className="_row mb-3">
-                        <label className="col-sm-4 col-form-label">Username</label>
-                        <div className="col-sm-8">
+                        <label className="col-sm-2 col-form-label">Username</label>
+                        <div className="col-sm-10">
                             <input className="form-control" name="userName" />
                         </div>
                     </div>
                     <div className="_row mb-3">
-                        <label className="col-sm-4 col-form-label">Password</label>
-                        <div className="col-sm-8">
+                        <label className="col-sm-2 col-form-label">Password</label>
+                        <div className="col-sm-10">
                             <input className="form-control" type="password" name="password" />
                         </div>
                     </div>
@@ -137,6 +137,13 @@ function Login_Content() {
                         </div>
                     </div>
                 </form>
+            </div>
+            <div style={{ padding: "15px" }}></div>
+            <div className="account-links">
+                <ul>
+                    <li ><Link to={"forgot-password"} className="normal_text">Forgot your password?</Link></li>
+                    <li><Link to={"sign-up"} className="normal_text">Create Account</Link></li>
+                </ul>
             </div>
         </>
     )
