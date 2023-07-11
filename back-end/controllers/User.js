@@ -4,6 +4,7 @@ const UserSchema = require("../models/User");
 const ImageSchema = require("../models/Image");
 const bcrypt = require("bcrypt");
 const utilToken = require("../config/utilToken");
+const jwt = require("jsonwebtoken");
 
 const STATUS_CODE_OK = 200;
 const STATUS_CODE_NO_CONTENT = 204;
@@ -47,16 +48,28 @@ exports.authUser = async (req, res) => {
     const { userName, password } = req.body
 
     if (!userName) {
-        return res.status(422).json({ message: 'Please provide your email!' });
+        return res.status(422).json({ message: 'Please provide your username!' });
     }
     if (!password) {
-        return res.status(422).json({ message: 'Please provide your email!' });
+        return res.status(422).json({ message: 'Please provide your password!' });
     }
 
     const user = await UserSchema.findOne({ userName: userName })
 
     if (!user) {
-        return res.status(422).json({ message: 'User not found!'})
+        return res.status(404).json({ message: 'User not found!' })
+    }
+
+    const checkPassword = await bcrypt.compare(password, user.password);
+
+    if (!checkPassword) {
+        return res.status(422).json({ message: "Senha inválida" });
+    }
+
+    try {
+        res.status(200).json({ message: "Autenticação realizada com sucesso!" });
+    } catch (error) {
+        res.status(500).json({ message: error });
     }
 
 };
