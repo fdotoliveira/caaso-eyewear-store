@@ -18,8 +18,60 @@ function Login() {
 }
 
 function Login_Content() {
+    const [errorMessage, setErrorMessage] = useState("");
+    const [users, setUsers] = useState([]);
 
     const navigate = useNavigate();
+
+    const handleLogin = (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+
+        const user = Object.fromEntries(formData.entries());
+
+        if (!user.userName || !user.password) {
+            console.log("Please provide all the required information!");
+            setErrorMessage(
+                <div className="alert alert-warning" role="alert">
+                    Please provide all the required information!
+                </div>
+            )
+            return;
+        }
+
+        fetch("http://localhost:3001/user/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not OK");
+                }
+
+                fetch("http://localhost:3001/user/" + user.userName)
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Unexpected Server Response");
+                        }
+                        return response.json()
+                    })
+                    .then((data) => {
+                        localStorage.setItem('login', JSON.stringify(data[0].user));
+                        navigate("/")
+                    })
+                    .catch((error) => console.log("Error: ", error));
+
+                return response.json()
+
+            })
+            .catch((error) => {
+                console.log("Error: ", error);
+            });
+    }
 
     const checkFields = (event) => {
 
@@ -65,37 +117,26 @@ function Login_Content() {
                 <h1>Login</h1>
             </div>
             <div className="input-content">
-                <form>
-                    <center>
-                        <p id="warning-message" style={{ display: "none", color: "red" }}>All fields need to be filled in.</p>
-                    </center>
-                    <div className="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" placeholder="Email"
-                            onKeyDown={clickPress} />
+                <form onSubmit={(event) => handleLogin(event)}>
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Username</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" name="userName" />
+                        </div>
+                    </div>
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Password</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" type="password" name="password" />
+                        </div>
                     </div>
                     <div style={{ padding: "10px" }}></div>
-                    <div className="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Password"
-                            onKeyDown={clickPress} />
+                    <div className="_row">
+                        <div className="offset-sm-2 col-sm-8 d-grid">
+                            <button type="submit" className="btn btn-primary btn-sm me-3">Save</button>
+                        </div>
                     </div>
                 </form>
-                <div style={{ padding: "10px" }}></div>
-                <div className="profile-button" style={{ width: "70%", marginLeft: "15%" }}>
-                    <Link onClick={checkFields} to="/" className='link-profile'>
-                        <center>
-                            Log In
-                        </center>
-                    </Link>
-                </div>
-            </div>
-            <div style={{ padding: "10px" }}></div>
-            <div className="account-links">
-                <ul>
-                    <li><Link to={"forgot-password"} className="normal_text">Forgot your password?</Link></li>
-                    <li><Link to={"sign-up"} className="normal_text">Create Account</Link></li>
-                </ul>
             </div>
         </>
     )
@@ -188,14 +229,6 @@ function SignUp_Content() {
             console.log("A");
             event.preventDefault();
             document.getElementById("warning-message").style.display = "inline";
-        }
-    }
-
-    const clickPress = (event) => {
-
-        if (event.key === "Enter") {
-
-            checkFields();
         }
     }
 
