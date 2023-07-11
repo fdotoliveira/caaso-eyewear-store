@@ -102,7 +102,18 @@ function UserForm(props) {
 
         const user = Object.fromEntries(formData.entries());
 
-        if (!user.userName || !user.email || !user.password || user.confirmedPassword) {
+
+        if (!props.user._id && !user.userName) {
+            console.log("Please enter your username!");
+            setErrorMessage(
+                <div className="alert alert-warning" role="alert">
+                    Please enter your username!
+                </div>
+            )
+            return;
+        }
+
+        if (!user.email || !user.password || user.confirmedPassword) {
             console.log("Please provide all the required information!");
             setErrorMessage(
                 <div className="alert alert-warning" role="alert">
@@ -162,9 +173,23 @@ function UserForm(props) {
             <div className="col-lg-6 mx-auto">
                 <form onSubmit={(event) => handleSubmit(event)}>
                     <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Username</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" readOnly={props.user._id ? true : false} name="userName" defaultValue={props.user.userName} />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
                         <label className="col-sm-4 col-form-label">Name</label>
                         <div className="col-sm-8">
                             <input className="form-control" name="name" defaultValue={props.user.name} />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Email</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" readOnly={props.user._id ? true : false} name="email" defaultValue={props.user.email} />
                         </div>
                     </div>
 
