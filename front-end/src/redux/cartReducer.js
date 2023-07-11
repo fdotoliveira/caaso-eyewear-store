@@ -11,7 +11,10 @@ export const cartSlice = createSlice({
     addToCart: (state, action) => {
       const item = state.products.find((item) => item.id === action.payload.id);
       if (item) {
-        item.quantity += action.payload.quantity;
+        const newQuantity = item.quantity + action.payload.quantity;
+        if (newQuantity <= item.stock) {
+          item.quantity = newQuantity;
+        }
       } else {
         /*const newItem = { ...action.payload, img: action.payload.img };*/
         state.products.push(action.payload);
