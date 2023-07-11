@@ -44,64 +44,21 @@ exports.isAdmin = async (req, res) => {
 };
 
 exports.authUser = async (req, res) => {
-    const { userName, password } = req.body;
+    const { userName, password } = req.body
 
-    if (userName === "admin") {
-        if (password !== "admin") {
-            return res.status(STATUS_CODE_ERROR).send({ message: "Usuário ou senha incorretos." });
-        }
-
-        let userAdmin = await UserSchema.findOne({ userName: userName });
-        if (userAdmin === null) {
-            const salt = await bcrypt.genSalt(10);
-            const encryptedPassword = await bcrypt.hash("admin", salt);
-
-            userAdmin = await new UserSchema({
-                userName: "admin",
-                email: "admin@admin.com",
-                password: encryptedPassword,
-                admin: true
-            });
-
-            await userAdmin.save();
-        }
-        userAdmin = await UserSchema.findOne({ userName: userName });
-        const token = utilToken.generate(userAdmin._id);
-        res.cookie("token", token);
-        return res.status(STATUS_CODE_OK).send({
-            message: "Admin logado com sucesso.",
-            token: token
-        });
+    if (!userName) {
+        return res.status(422).json({ message: 'Please provide your email!' });
+    }
+    if (!password) {
+        return res.status(422).json({ message: 'Please provide your email!' });
     }
 
-    if (util.isEmpty(userName) || util.isEmpty(password)) {
-        return res.status(STATUS_CODE_ERROR).send({ message: "Dados insuficientes." });
-    }
-    let user = null;
+    const user = await UserSchema.findOne({ userName: userName })
 
-    try {
-        if (userName.includes("@")) user = await UserSchema.findOne({ email: userName });
-        else user = await UserSchema.findOne({ userName: userName });
-
-        //TODO:
-        //se não achar tem que procurar nos admins
-    } catch (e) {
-        console.log(e);
-        return res.status(STATUS_CODE_INTERNAL_SERVER_ERROR).json({ message: "Erro ao fazer login." });
+    if (!user) {
+        return res.status(422).json({ message: 'User not found!'})
     }
 
-    if (!util.isEmpty(user) && (await user.matchPassword(password))) {
-        const token = utilToken.generate(user._id);
-        res.cookie("token", token);
-
-        res.status(STATUS_CODE_OK).send({
-            message: "Logado com sucesso.",
-            user: user,
-            token: token
-        });
-    } else {
-        res.status(STATUS_CODE_ERROR).send({ message: "Usuário ou senha incorretos." });
-    }
 };
 
 const validateEmail = (email) => {
@@ -441,6 +398,24 @@ exports.findAll = async (req, res) => {
         console.log(error);
         res.status(STATUS_CODE_ERROR).send({
             message: "Erro ao buscar os usuários.",
+            error: error
+        });
+    }
+};
+
+exports.findUserByUsername = async (req, res) => {
+    try {
+        const data = await UserSchema.find();
+        let dataMapped = [];
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].userName === req.params.userName)
+                dataMapped.push({ image: undefined, user: data[i] });
+        }
+        res.status(STATUS_CODE_OK).send(dataMapped);
+    } catch (error) {
+        console.log(error);
+        res.status(STATUS_CODE_ERROR).send({
+            message: "Erro ao buscar o usuário.",
             error: error
         });
     }

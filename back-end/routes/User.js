@@ -3,6 +3,7 @@ const router = express.Router();
 const UserController = require('../controllers/User')
 
 router.get('/user', UserController.findAll);
+router.get('/user/:userName', UserController.findUserByUsername);
 router.get('/admin', UserController.findAllAdmin);
 router.get('/isAdmin/:token', UserController.isAdmin);
 router.get('/getUserByToken/:token', UserController.getUserByToken);
