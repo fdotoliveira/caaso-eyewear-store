@@ -1,22 +1,23 @@
-import {Link, Outlet, useNavigate} from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
-export {Login, Login_Content, SignUp_Content, ForgotPassword_Content};
+export { Login, Login_Content, SignUp_Content, ForgotPassword_Content };
 
-function Login(){
+function Login() {
 
     return (
         <>
-        <div className="central_div">
-            <div className="central_box">
+            <div className="central_div">
+                <div className="central_box">
 
-                <Outlet/>
+                    <Outlet />
+                </div>
             </div>
-        </div>
         </>
     )
 }
 
-function Login_Content(){
+function Login_Content() {
 
     const navigate = useNavigate();
 
@@ -28,15 +29,15 @@ function Login_Content(){
         resultado[0] = document.getElementById("email").value;
         resultado[1] = document.getElementById("password").value;
 
-        for(let contador=0; contador<2; contador++){
+        for (let contador = 0; contador < 2; contador++) {
 
-            if (resultado[contador] === ""){
+            if (resultado[contador] === "") {
 
                 checagem = false;
             }
         }
 
-        if(checagem === true){
+        if (checagem === true) {
 
             localStorage.setItem('login', JSON.stringify(resultado));
             console.log(resultado);
@@ -44,7 +45,7 @@ function Login_Content(){
             navigate("/");
 
         } else {
-        
+
             event.preventDefault();
             document.getElementById("warning-message").style.display = "inline";
         }
@@ -52,7 +53,7 @@ function Login_Content(){
 
     const clickPress = (event) => {
 
-        if (event.key === "Enter"){
+        if (event.key === "Enter") {
 
             checkFields();
         }
@@ -60,47 +61,86 @@ function Login_Content(){
 
     return (
         <>
-        <div className="input-label">
-            <h1>Login</h1>
-        </div>
-        <div className="input-content">
-            <form>
-                <center>
-                <p id="warning-message" style={{display: "none", color: "red"}}>All fields need to be filled in.</p>
-                </center>
-                <div className="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Email"
-                        onKeyDown={clickPress}/>
-                </div>
-                <div style={{padding: "10px"}}></div>
-                <div className="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password"
-                        onKeyDown={clickPress}/>
-                </div>
-            </form>
-            <div style={{padding: "10px"}}></div>
-            <div className="profile-button" style={{width: "70%", marginLeft: "15%"}}> 
-                <Link onClick={checkFields} to="/" className='link-profile'>
-                    <center>
-                        Log In
-                    </center>
-                </Link>
+            <div className="input-label">
+                <h1>Login</h1>
             </div>
-        </div>
-        <div style={{padding: "10px"}}></div>
-        <div className="account-links">
-            <ul>
-                <li><Link to={"forgot-password"} className="normal_text">Forgot your password?</Link></li>
-                <li><Link to={"sign-up"} className="normal_text">Create Account</Link></li>
-            </ul>
-        </div>
+            <div className="input-content">
+                <form>
+                    <center>
+                        <p id="warning-message" style={{ display: "none", color: "red" }}>All fields need to be filled in.</p>
+                    </center>
+                    <div className="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email"
+                            onKeyDown={clickPress} />
+                    </div>
+                    <div style={{ padding: "10px" }}></div>
+                    <div className="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password"
+                            onKeyDown={clickPress} />
+                    </div>
+                </form>
+                <div style={{ padding: "10px" }}></div>
+                <div className="profile-button" style={{ width: "70%", marginLeft: "15%" }}>
+                    <Link onClick={checkFields} to="/" className='link-profile'>
+                        <center>
+                            Log In
+                        </center>
+                    </Link>
+                </div>
+            </div>
+            <div style={{ padding: "10px" }}></div>
+            <div className="account-links">
+                <ul>
+                    <li><Link to={"forgot-password"} className="normal_text">Forgot your password?</Link></li>
+                    <li><Link to={"sign-up"} className="normal_text">Create Account</Link></li>
+                </ul>
+            </div>
         </>
     )
 }
 
-function SignUp_Content(){
+function SignUp_Content() {
+    const [errorMessage, setErrorMessage] = useState("");
+
+    function handleRegister(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+
+        const user = Object.fromEntries(formData.entries());
+
+        if (!user.userName || !user.email || !user.password || user.confirmedPassword) {
+            console.log("Please provide all the required information!");
+            setErrorMessage(
+                <div className="alert alert-warning" role="alert">
+                    Please provide all the required information!
+                </div>
+            )
+            return;
+        }
+
+        fetch("http://localhost:3001/user", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not OK");
+                }
+                return response.json()
+
+            })
+            .catch((error) => {
+                console.log("Error: ", error);
+            });
+
+        navigate("/login");
+    }
 
     const navigate = useNavigate();
 
@@ -114,27 +154,27 @@ function SignUp_Content(){
         resultado[2] = document.getElementById("confirm-password").value;
         resultado[3] = document.getElementById("cpf").value;
 
-        for(let contador=0; contador<4; contador++){
+        for (let contador = 0; contador < 4; contador++) {
 
-            if (resultado[contador] === ""){
+            if (resultado[contador] === "") {
 
                 document.getElementById("warning-message").innerHTML = "All fields need to be filled in.";
                 checagem = false;
             }
         }
-        if(!document.getElementById("terms-conditions").checked){
-                
+        if (!document.getElementById("terms-conditions").checked) {
+
             document.getElementById("warning-message").innerHTML = "You need to agree with our terms and conditions.";
             checagem = false;
         }
 
-        if(resultado[1] !== resultado[2]){
+        if (resultado[1] !== resultado[2]) {
 
             document.getElementById("warning-message").innerHTML = "You typed two different passwords.";
             checagem = false;
         }
 
-        if(checagem === true){
+        if (checagem === true) {
 
             resultado.splice(2, 1);
 
@@ -153,7 +193,7 @@ function SignUp_Content(){
 
     const clickPress = (event) => {
 
-        if (event.key === "Enter"){
+        if (event.key === "Enter") {
 
             checkFields();
         }
@@ -161,79 +201,88 @@ function SignUp_Content(){
 
     return (
         <>
-        <div className="input-label">
-            <h1>Sign Up</h1>
-        </div>
-        <div className="input-content">
-            <form>
-                <center>
-                <p id="warning-message" style={{display: "none", color: "red"}}>All fields need to be filled in.</p>
-                </center>
-                <div className="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Email"
-                        onKeyDown={clickPress}/>
-                </div>
-                <div style={{padding: "10px"}}></div>
-                <div className="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password"
-                        onKeyDown={clickPress}/>
-                </div>
-                <div style={{padding: "10px"}}></div>
-                <div className="form-group">
-                    <label for="password">Confirm password</label>
-                    <input type="password" class="form-control" id="confirm-password" placeholder="Confirm password"
-                        onKeyDown={clickPress}/>
-                </div>
-                <div style={{padding: "10px"}}></div>
-                <div className="form-group">
-                    <label for="cpf">CPF</label>
-                    <input type="text" class="form-control" id="cpf" placeholder="CPF"
-                        onKeyDown={clickPress}/>
-                </div>
-                <div style={{padding: "10px"}}></div>
-                <div className="form-group">
-                    <input type="checkbox" id="terms-conditions" name="terms-conditions" value="terms-conditions"/>
-                    <label for="terms-conditions"> I agree with any terms and conditions.</label>
-                </div>
-                <div style={{padding: "10px"}}></div>
-                <div className="form-group">
-                    <input type="checkbox" id="receive-email" name="receive-email" value="receive-email"/>
-                    <label for="receive-email"> I wish to receive the latest fashion on my email box.</label>
-                </div>
-            </form>
-            <div style={{padding: "10px"}}></div>
-            <div className="profile-button" style={{width: "70%", marginLeft: "15%"}}> 
-                <Link onClick={checkFields} to="/" className='link-profile'>
-                    <center>
-                        Create Account
-                    </center>
-                </Link>
+            <div className="input-label">
+                <h1>Sign Up</h1>
             </div>
-        </div>
-        <div style={{padding: "10px"}}></div>
+            <div className="input-content">
+                <form onSubmit={(event) => handleRegister(event)}>
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Username</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" name="userName" />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Name</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" name="name" />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Email</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" name="email" />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Telephone</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" name="tel" />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">CPF</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" name="cpf" />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Password</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" type="password" name="password" />
+                        </div>
+                    </div>
+
+                    <div className="_row mb-3">
+                        <label className="col-sm-4 col-form-label">Confirm Password</label>
+                        <div className="col-sm-8">
+                            <input className="form-control" type="password" name="confirmPassword" />
+                        </div>
+                    </div>
+                    <div style={{ padding: "10px" }}></div>
+                    <div className="_row">
+                        <div className="offset-sm-2 col-sm-8 d-grid">
+                            <button type="submit" className="btn btn-primary btn-sm me-3">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </>
     )
 }
 
-function ForgotPassword_Content(){
+function ForgotPassword_Content() {
 
-    return(
+    return (
         <>
-        <div className="input-label">
-            <h1>Reset your password</h1>
-        </div>
-        <div className="input-content">
-            <form>
-                <center><p>Please, type your email to receive a temporary password.</p></center>
-                <div className="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Email"/>
-                </div>
-            </form>
-        </div>
-        <div style={{padding: "10px"}}></div>
+            <div className="input-label">
+                <h1>Reset your password</h1>
+            </div>
+            <div className="input-content">
+                <form>
+                    <center><p>Please, type your email to receive a temporary password.</p></center>
+                    <div className="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email" />
+                    </div>
+                </form>
+            </div>
+            <div style={{ padding: "10px" }}></div>
         </>
 
     )
