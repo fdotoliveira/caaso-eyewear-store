@@ -13,6 +13,8 @@ const Product = () => {
   const [quantity, setQuantity] = useState(1);
   const [currentProduct, setCurrentProduct] = useState(null);
   const dispatch = useDispatch();
+  const [showPopup, setShowPopup] = useState(false); // Estado para controlar a exibição do pop-up
+
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -34,6 +36,24 @@ const Product = () => {
   const handleImageClick = (imageKey) => {
     setSelectedImg(imageKey);
   }
+
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        id: currentProduct.product._id,
+        title: currentProduct.product.title,
+        desc: currentProduct.product.desc,
+        price: currentProduct.product.price,
+        img: currentProduct.product.image1,
+        quantity,
+        stock: currentProduct.product.stock,
+      })
+    );
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false); // Oculta o pop-up após 5 segundos
+    }, 1000);
+  };  
 
   return (
     <div className="product">
@@ -66,27 +86,20 @@ const Product = () => {
             Available stock: {currentProduct.product.stock}
           </span>
           <span>Product Type: {currentProduct.product.type}, {currentProduct.product.category}</span>
-        </div>
+        </div> 
         <button
           className="add"
-          onClick={() =>
-            dispatch(
-              addToCart({
-                id: currentProduct.product._id,
-                title: currentProduct.product.title,
-                desc: currentProduct.product.desc,
-                price: currentProduct.product.price,
-                img: currentProduct.product.image1,
-                quantity,
-                stock: currentProduct.product.stock,
-              })
-            )
-          }
+          onClick={handleAddToCart}
           disabled={currentProduct.qty === 0}
         >
           {currentProduct.qty === 0 ? "OUT OF STOCK" : "ADD TO CART"}
         </button>
       </div>
+        {showPopup && (
+        <div className="popup">
+          <span>ITEM ADDED TO CART!</span>
+        </div>
+      )}
     </div>
   );
 };

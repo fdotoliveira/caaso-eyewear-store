@@ -61,7 +61,7 @@
         border: none;
       }
     }
-
+    
     .add{
       width: 400px;
       padding: 10px;
@@ -74,6 +74,19 @@
       cursor: pointer;
       border: none;
       font-weight: 500;
+      position: relative;
+    }
+
+    .popup {
+      position: absolute;
+      bottom: -40px; /* Posiciona abaixo do botão */
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      text-align: center;
     }
 
     .info{
