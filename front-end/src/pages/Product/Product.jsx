@@ -78,6 +78,7 @@ const Product = () => {
                 price: currentProduct.product.price,
                 img: currentProduct.product.image1,
                 quantity,
+                stock: currentProduct.product.stock,
               })
             )
           }
