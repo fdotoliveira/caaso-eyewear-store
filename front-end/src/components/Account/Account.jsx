@@ -2,7 +2,7 @@ import React from "react";
 import "./Account.scss";
 import { Link, useNavigate } from "react-router-dom";
 
-const Account = ({isOpen}) => {
+const Account = ({ isOpen }) => {
 
     const navigate = useNavigate();
 
@@ -21,21 +21,29 @@ const Account = ({isOpen}) => {
                         My Account
                     </div>
                 </Link>
-                <Link className="link" to="product-list">
-                    <div className="item">
-                        Product List
+                {JSON.parse(localStorage.getItem('login')).admin === true ?
+                    <div>
+                        <Link className="link" to="product-list">
+                            <div className="item">
+                                Product List
+                            </div>
+                        </Link>
+                        <Link className="link" to="user-list">
+                            <div className="item">
+                                User List
+                            </div>
+                        </Link>
+                        <Link className="link" to="admin-list">
+                            <div className="item">
+                                Admin List
+                            </div>
+                        </Link>
                     </div>
-                </Link>
-                <Link className="link" to="user-list">
-                    <div className="item">
-                        User List
-                    </div>
-                </Link>
-                <Link className="link" to="admin-list">
-                    <div className="item">
-                        Admin List
-                    </div>
-                </Link>
+
+                    :
+
+                    ""
+                }
 
                 <div className="item" onClick={handleLogOutClick}>
                     Log Out
