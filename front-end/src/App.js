@@ -16,6 +16,7 @@ import {Content_Address} from "./pages/Profile/Address/Address";
 import {Content_Address_Create} from "./pages/Profile/Address/Address_Create";
 import {Content_AddressData} from "./pages/Profile/Address/Address_Generic";
 import {Content_Orders} from "./pages/Profile/Orders/Orders";
+import {Content_Orders_Data} from "./pages/Profile/Orders/Orders_Generic";
 import {Login, Login_Content, SignUp_Content, ForgotPassword_Content} from "./pages/Login/Login";
 import {Payment, Payment_Card, Payment_Pix, Payment_New, Payment_Choose} from "./pages/Payment/Payment";
 import "./app.scss"
@@ -111,6 +112,10 @@ const router = createBrowserRouter([
       {
         path: "perfil/orders",
         element: <Content_Orders />
+      },
+      {
+        path: "perfil/orders/:id",
+        element: <Content_Orders_Data />
       },
       {
         path: "login",

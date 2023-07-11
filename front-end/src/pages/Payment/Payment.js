@@ -2,8 +2,8 @@ import './assets/css/main.css';
 import React, {useState, useEffect} from 'react';
 import {Link, Outlet, useNavigate} from "react-router-dom";
 import './assets/css/profile.css';
-import { resetCart } from "../../redux/cartReducer";
-import { useDispatch } from "react-redux";
+import { removeItem, resetCart } from "../../redux/cartReducer";
+import { useDispatch, useSelector } from "react-redux";
 
 export {Payment, Payment_Choose, Payment_Pix, Payment_Card, Payment_New};
 
@@ -43,6 +43,7 @@ function Payment_New( {} ){
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const products = useSelector((state) => state.cart.products);
 
     const checkFields = (evento) => {
 
@@ -63,6 +64,18 @@ function Payment_New( {} ){
         }
 
         if(checagem === true){
+
+            let newArray = JSON.parse(localStorage.getItem('orders'));
+
+            if(newArray === null){
+
+                newArray = []
+            }
+
+            newArray.push(products);
+
+            localStorage.setItem('orders', JSON.stringify(newArray));
+
 
             dispatch(resetCart());
             navigate("/");
@@ -128,6 +141,7 @@ function Payment_New( {} ){
 function Payment_Card( {} ){
 
     const dispatch = useDispatch();
+    const products = useSelector((state) => state.cart.products);
 
     const clickPress = (evento) => {
 

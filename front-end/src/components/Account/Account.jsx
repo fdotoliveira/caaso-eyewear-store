@@ -9,6 +9,10 @@ const Account = ({ isOpen }) => {
     const handleLogOutClick = () => {
 
         localStorage.removeItem('login');
+        localStorage.removeItem('pay-methods');
+        localStorage.removeItem('p-data');
+        localStorage.removeItem('address');
+        localStorage.removeItem('orders');
         isOpen();
         navigate("/");
     }

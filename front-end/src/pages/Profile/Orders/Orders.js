@@ -43,9 +43,7 @@ function Content_Orders( {} ){
 
     const whichOrder = (evento) => {
 
-        const orders = JSON.parse(localStorage.getItem('orders'));
-
-        localStorage.setItem('which-address', JSON.stringify(orders[evento.target.id-1]));
+        localStorage.setItem('which-order', JSON.stringify(evento.target.id-1));
     }
 
     return (
@@ -66,7 +64,7 @@ function Content_Orders( {} ){
                                     return (
                                         <Link to={""+contador} className='link-profile' onClick={whichOrder}>
                                             <div>
-                                                <li className="list-group-item" id={contador} key={num}>Order of "{num}"</li>
+                                                <li className="list-group-item" id={contador} key={num}>Order {contador}</li>
                                             </div>
                                         </Link>
                                     )
